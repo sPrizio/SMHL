@@ -1,6 +1,22 @@
 <template>
     <div id="skaters">
-        <h2>This is the skaters view</h2>
+        <section class="hero is-small">
+            <div class="hero-body">
+                <div class="container">
+                    <h1 class="title">
+                        Active Skaters
+                    </h1>
+                    <h2 class="subtitle">
+                        A comprehensive look at all active skaters for the {{ this.currentSeason }} season
+                    </h2>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <hr/>
+        </div>
+
         <SkaterTable :skaters="skaters"/>
     </div>
 </template>
@@ -16,17 +32,30 @@
         },
         data() {
             return {
-                skaters: []
+                skaters: [],
+                currentSeason: ''
             }
         },
         created() {
-            this.performApiCall();
+            this.getSkaters();
+            this.getCurrentSeasonString();
         },
         methods: {
-            performApiCall: function () {
+
+            //  gets all active skaters
+            getSkaters: function () {
                 axios.get(this.domain + '/api/skater/all-active')
                     .then(response => {
                         this.skaters = response.data.data;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            getCurrentSeasonString: function () {
+                axios.get(this.domain + '/api/current-season')
+                    .then(response => {
+                        this.currentSeason = response.data.data;
                     })
                     .catch(error => {
                         console.log(error)
