@@ -69,6 +69,16 @@
             </div>
         </nav>
         <router-view/>
+        <footer class="footer">
+            <div class="content has-text-centered">
+                <p>
+                    <strong>SMHL &copy;</strong> 2019 All rights reserved
+                </p>
+                <p>
+                    Powered by HDM
+                </p>
+            </div>
+        </footer>
     </div>
 </template>
 
@@ -76,6 +86,7 @@
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        min-height: 100vh;
     }
 
     #nav {
@@ -143,8 +154,9 @@
         -khtml-user-select: none; /* Konqueror HTML */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
-        user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+        user-select: none;
+        /* Non-prefixed version, currently
+                                         supported by Chrome and Opera */
     }
 
     .container-smhl-table {

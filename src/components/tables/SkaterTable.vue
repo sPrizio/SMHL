@@ -71,39 +71,39 @@
             return {
                 sortParams: {
                     "name": SortQuery = {
-                        param: "name",
+                        param: "last_name",
                         value: ''
                     },
                     "pos": SortQuery = {
-                        param: "pos",
+                        param: "position",
                         value: ''
                     },
                     "gp": SortQuery = {
-                        param: "gp",
+                        param: "games_played",
                         value: ''
                     },
                     "g": SortQuery = {
-                        param: "g",
+                        param: "goals",
                         value: ''
                     },
                     "a": SortQuery = {
-                        param: "a",
+                        param: "assists",
                         value: ''
                     },
                     "p": SortQuery = {
-                        param: "p",
+                        param: "points",
                         value: ''
                     },
                     "ppg": SortQuery = {
-                        param: "ppg",
+                        param: "points_per_game",
                         value: ''
                     },
                     "s": SortQuery = {
-                        param: "s",
+                        param: "shots",
                         value: ''
                     },
                     "bs": SortQuery = {
-                        param: "bs",
+                        param: "blocked_shots",
                         value: ''
                     }
                 }
@@ -113,12 +113,15 @@
             //  toggles sorting per column
             toggleSortParameter: function (sortParam) {
                 if (!this.sortParams[sortParam].value) {
+                    this.resetSortArrows();
                     this.sortParams[sortParam].value = 'asc';
-                    //  todo: emit event that will be caught by view to re-sort by attribute in ascending order
+                    this.$emit('sortSkaters', this.sortParams[sortParam]);
                 } else if (this.sortParams[sortParam].value === 'asc') {
-                    this.sortParams[sortParam].value = 'desc'
-                    //  todo: emit event that will be caught by view to re-sort by attribute in descending order
+                    this.resetSortArrows();
+                    this.sortParams[sortParam].value = 'desc';
+                    this.$emit('sortSkaters', this.sortParams[sortParam]);
                 } else {
+                    this.resetSortArrows();
                     this.sortParams[sortParam].value = '';
                 }
             },
@@ -132,6 +135,13 @@
                 } else {
                     return '';
                 }
+            },
+
+            //  resets all sort arrows
+            resetSortArrows() {
+                Object.keys(this.sortParams).forEach(key => {
+                    this.sortParams[key].value = '';
+                })
             }
         }
     }

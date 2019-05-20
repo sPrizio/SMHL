@@ -17,7 +17,7 @@
             <hr/>
         </div>
 
-        <SkaterTable :skaters="skaters"/>
+        <SkaterTable :skaters="skaters" v-on:sortSkaters="handleSortEvenEmit"/>
     </div>
 </template>
 
@@ -37,14 +37,14 @@
             }
         },
         created() {
-            this.getSkaters();
+            this.getSkaters('last_name', 'asc');
             this.getCurrentSeasonString();
         },
         methods: {
 
             //  gets all active skaters
-            getSkaters: function () {
-                axios.get(this.domain + '/api/skater/all-active')
+            getSkaters: function (field, order) {
+                axios.get(this.domain + '/api/skater/all-active' + '?field=' + field + '&order=' + order)
                     .then(response => {
                         this.skaters = response.data.data;
                     })
@@ -60,6 +60,9 @@
                     .catch(error => {
                         console.log(error)
                     })
+            },
+            handleSortEvenEmit(sortQuery) {
+                this.getSkaters(sortQuery.param, sortQuery.value)
             }
         }
     }
