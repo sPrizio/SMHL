@@ -37,15 +37,15 @@
                         </thead>
                         <tbody>
                         <tr v-for="skater in skaters">
-                            <td class="column1">{{ skater.name }}</td>
-                            <td class="column2 smhl-table-centering">{{ skater.position.toString().substr(0, 1) }}</td>
-                            <td class="column3 smhl-table-centering">{{ skater.currentSeason.gamesPlayed }}</td>
-                            <td class="column4 smhl-table-centering">{{ skater.currentSeason.goals }}</td>
-                            <td class="column5 smhl-table-centering">{{ skater.currentSeason.assists }}</td>
-                            <td class="column6 smhl-table-centering">{{ skater.currentSeason.points }}</td>
-                            <td class="column7 smhl-table-centering">{{ skater.currentSeason.pointsPerGame }}</td>
-                            <td class="column8 smhl-table-centering">{{ skater.currentSeason.shots }}</td>
-                            <td class="column9 smhl-table-centering">{{ skater.currentSeason.blockedShots }}</td>
+                            <td class="column1" v-bind:class="nameActive">{{ skater.name }}</td>
+                            <td class="column2 smhl-table-centering" v-bind:class="posActive">{{ skater.position.toString().substr(0, 1) }}</td>
+                            <td class="column3 smhl-table-centering" v-bind:class="gpActive">{{ skater.season.gamesPlayed }}</td>
+                            <td class="column4 smhl-table-centering" v-bind:class="gActive">{{ skater.season.goals }}</td>
+                            <td class="column5 smhl-table-centering" v-bind:class="aActive">{{ skater.season.assists }}</td>
+                            <td class="column6 smhl-table-centering" v-bind:class="pActive">{{ skater.season.points }}</td>
+                            <td class="column7 smhl-table-centering" v-bind:class="ppgActive">{{ skater.season.pointsPerGame }}</td>
+                            <td class="column8 smhl-table-centering" v-bind:class="sActive">{{ skater.season.shots }}</td>
+                            <td class="column9 smhl-table-centering" v-bind:class="bsActive">{{ skater.season.blockedShots }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -67,8 +67,38 @@
         props: {
             skaters: Array
         },
+        computed: {
+            nameActive: function () {
+                return this.sortIndex === 'name' ? 'is-active' : '';
+            },
+            posActive: function () {
+                return this.sortIndex === 'pos' ? 'is-active' : '';
+            },
+            gpActive: function () {
+                return this.sortIndex === 'gp' ? 'is-active' : '';
+            },
+            gActive: function () {
+                return this.sortIndex === 'g' ? 'is-active' : '';
+            },
+            aActive: function () {
+                return this.sortIndex === 'a' ? 'is-active' : '';
+            },
+            pActive: function () {
+                return this.sortIndex === 'p' ? 'is-active' : '';
+            },
+            ppgActive: function () {
+                return this.sortIndex === 'ppg' ? 'is-active' : '';
+            },
+            sActive: function () {
+                return this.sortIndex === 's' ? 'is-active' : '';
+            },
+            bsActive: function () {
+                return this.sortIndex === 'bs' ? 'is-active' : '';
+            }
+        },
         data() {
             return {
+                sortIndex: 'p',
                 sortParams: {
                     "name": SortQuery = {
                         param: "last_name",
@@ -92,7 +122,7 @@
                     },
                     "p": SortQuery = {
                         param: "points",
-                        value: ''
+                        value: 'desc'
                     },
                     "ppg": SortQuery = {
                         param: "points_per_game",
@@ -116,13 +146,16 @@
                     this.resetSortArrows();
                     this.sortParams[sortParam].value = 'asc';
                     this.$emit('sortSkaters', this.sortParams[sortParam]);
+                    this.sortIndex = sortParam;
                 } else if (this.sortParams[sortParam].value === 'asc') {
                     this.resetSortArrows();
                     this.sortParams[sortParam].value = 'desc';
                     this.$emit('sortSkaters', this.sortParams[sortParam]);
+                    this.sortIndex = sortParam;
                 } else {
                     this.resetSortArrows();
                     this.sortParams[sortParam].value = '';
+                    this.sortIndex = '';
                 }
             },
 
@@ -148,5 +181,9 @@
 </script>
 
 <style scoped lang="scss">
+
+    .is-active {
+        background-color: rgba(200, 200, 255, 0.30);
+    }
 
 </style>

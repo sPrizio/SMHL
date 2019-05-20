@@ -37,14 +37,14 @@
             }
         },
         created() {
-            this.getSkaters('last_name', 'asc');
+            this.getSkaters('2018-2019', 'points', 'desc');
             this.getCurrentSeasonString();
         },
         methods: {
 
             //  gets all active skaters
-            getSkaters: function (field, order) {
-                axios.get(this.domain + '/api/skater/all-active' + '?field=' + field + '&order=' + order)
+            getSkaters: function (season, field, order) {
+                axios.get(this.domain + '/api/skater/all-active' + '?seasonString=' + season + '&field=' + field + '&order=' + order)
                     .then(response => {
                         this.skaters = response.data.data;
                     })
@@ -62,7 +62,7 @@
                     })
             },
             handleSortEvenEmit(sortQuery) {
-                this.getSkaters(sortQuery.param, sortQuery.value)
+                this.getSkaters('2018-2019', sortQuery.param, sortQuery.value)
             }
         }
     }
