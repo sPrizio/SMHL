@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="navbar-brand">
                     <router-link class="navbar-item" to="home">
-                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                        <img src="https://bulma.io/images/bulma-logo.png" alt="SMHL Website Brand" width="112" height="28" />
                     </router-link>
 
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
@@ -16,7 +16,11 @@
                 </div>
 
                 <div id="navbarData" class="navbar-menu noselect" v-bind:class="toggleNavView">
-                    <div class="navbar-start"></div>
+                    <div class="navbar-start">
+                        <div class="navbar-item">
+                            <small>Version 0.1</small>
+                        </div>
+                    </div>
                     <div class="navbar-end">
                         <router-link to="stats" class="navbar-item">
                             Stats
@@ -74,7 +78,8 @@
         methods: {
             toggleNav: function () {
                 this.isMobileNav ? this.isMobileNav = false : this.isMobileNav = true;
-            }
+            },
+
         }
     }
 </script>

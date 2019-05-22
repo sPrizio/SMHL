@@ -38,14 +38,30 @@
                         <tbody>
                         <tr v-for="skater in skaters">
                             <td class="column1" v-bind:class="nameActive">{{ skater.name }}</td>
-                            <td class="column2 smhl-table-centering" v-bind:class="posActive">{{ skater.position.toString().substr(0, 1) }}</td>
-                            <td class="column3 smhl-table-centering" v-bind:class="gpActive">{{ skater.season.gamesPlayed }}</td>
-                            <td class="column4 smhl-table-centering" v-bind:class="gActive">{{ skater.season.goals }}</td>
-                            <td class="column5 smhl-table-centering" v-bind:class="aActive">{{ skater.season.assists }}</td>
-                            <td class="column6 smhl-table-centering" v-bind:class="pActive">{{ skater.season.points }}</td>
-                            <td class="column7 smhl-table-centering" v-bind:class="ppgActive">{{ skater.season.pointsPerGame }}</td>
-                            <td class="column8 smhl-table-centering" v-bind:class="sActive">{{ skater.season.shots }}</td>
-                            <td class="column9 smhl-table-centering" v-bind:class="bsActive">{{ skater.season.blockedShots }}</td>
+                            <td class="column2 smhl-table-centering" v-bind:class="posActive">
+                                {{ skater.position.toString().substr(0, 1) }}
+                            </td>
+                            <td class="column3 smhl-table-centering" v-bind:class="gpActive">
+                                {{ skater.season.gamesPlayed }}
+                            </td>
+                            <td class="column4 smhl-table-centering" v-bind:class="gActive">
+                                {{ skater.season.goals }}
+                            </td>
+                            <td class="column5 smhl-table-centering" v-bind:class="aActive">
+                                {{ skater.season.assists }}
+                            </td>
+                            <td class="column6 smhl-table-centering" v-bind:class="pActive">
+                                {{ skater.season.points }}
+                            </td>
+                            <td class="column7 smhl-table-centering" v-bind:class="ppgActive">
+                                {{ skater.season.pointsPerGame }}
+                            </td>
+                            <td class="column8 smhl-table-centering" v-bind:class="sActive">
+                                {{ skater.season.shots }}
+                            </td>
+                            <td class="column9 smhl-table-centering" v-bind:class="bsActive">
+                                {{ skater.season.blockedShots }}
+                            </td>
                         </tr>
                         </tbody>
                     </table>
