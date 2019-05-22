@@ -1,68 +1,44 @@
 <template>
     <div id="app">
-        <div id="nav">
-            <router-link to="/">Home</router-link>
-            |
-            <router-link to="/about">About</router-link>
-            |
-            <router-link to="skaters">Skaters</router-link>
-        </div>
-        <nav class="navbar" role="navigation" aria-label="main navigation">
-            <div class="navbar-brand">
-                <a class="navbar-item" href="https://bulma.io">
-                    <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
-                </a>
+        <nav class="navbar is-light" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <router-link class="navbar-item" to="home">
+                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28">
+                    </router-link>
 
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
-                   data-target="navbarBasicExample">
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                </a>
-            </div>
-
-            <div id="navbarBasicExample" class="navbar-menu">
-                <div class="navbar-start">
-                    <a class="navbar-item">
-                        Home
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false"
+                       data-target="navbarData" v-on:click="toggleNav" v-bind:class="toggleNavView">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
                     </a>
-
-                    <a class="navbar-item">
-                        Documentation
-                    </a>
-
-                    <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
-                            More
-                        </a>
-
-                        <div class="navbar-dropdown">
-                            <a class="navbar-item">
-                                About
-                            </a>
-                            <a class="navbar-item">
-                                Jobs
-                            </a>
-                            <a class="navbar-item">
-                                Contact
-                            </a>
-                            <hr class="navbar-divider">
-                            <a class="navbar-item">
-                                Report an issue
-                            </a>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                            <a class="button is-primary">
-                                <strong>Sign up</strong>
+                <div id="navbarData" class="navbar-menu noselect" v-bind:class="toggleNavView">
+                    <div class="navbar-start"></div>
+                    <div class="navbar-end">
+                        <router-link to="stats" class="navbar-item">
+                            Stats
+                        </router-link>
+
+                        <router-link to="standings" class="navbar-item">
+                            Standings
+                        </router-link>
+
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                Players
                             </a>
-                            <a class="button is-light">
-                                Log in
-                            </a>
+
+                            <div class="navbar-dropdown">
+                                <router-link to="skaters" class="navbar-item">
+                                    Skaters
+                                </router-link>
+                                <router-link to="goalies" class="navbar-item">
+                                    Goalies
+                                </router-link>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,7 +58,33 @@
     </div>
 </template>
 
+<script>
+    export default {
+        name: 'App',
+        data () {
+            return {
+                isMobileNav: false
+            }
+        },
+        computed: {
+            toggleNavView: function () {
+                return this.isMobileNav ? 'is-active' : '';
+            },
+        },
+        methods: {
+            toggleNav: function () {
+                this.isMobileNav ? this.isMobileNav = false : this.isMobileNav = true;
+            }
+        }
+    }
+</script>
+
 <style lang="scss">
+
+    .hr {
+        border: 1px solid rgba(215, 215, 215, 0.5);
+    }
+
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
@@ -93,6 +95,7 @@
         a {
             font-weight: bold;
             color: #2c3e50;
+
             &.router-link-exact-active {
                 color: #42b983;
             }
@@ -151,7 +154,6 @@
     .noselect {
         -webkit-touch-callout: none; /* iOS Safari */
         -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
         -moz-user-select: none; /* Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none;
@@ -303,10 +305,10 @@
             content: "Name";
         }
         table tbody tr td:nth-child(2):before {
-            content: "Position";
+            content: "Pos";
         }
         table tbody tr td:nth-child(3):before {
-            content: "Games Played";
+            content: "GP";
         }
         table tbody tr td:nth-child(4):before {
             content: "Goals";
@@ -318,13 +320,13 @@
             content: "Points";
         }
         table tbody tr td:nth-child(7):before {
-            content: "Points Per Game";
+            content: "PPG";
         }
         table tbody tr td:nth-child(8):before {
             content: "Shots";
         }
         table tbody tr td:nth-child(9):before {
-            content: "Blocked Shots";
+            content: "BS";
         }
 
         .column1,

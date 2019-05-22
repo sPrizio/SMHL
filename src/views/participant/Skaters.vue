@@ -3,18 +3,32 @@
         <section class="hero is-small">
             <div class="hero-body">
                 <div class="container">
-                    <h1 class="title">
-                        Active Skaters
-                    </h1>
-                    <h2 class="subtitle">
-                        A comprehensive look at all active skaters for the {{ this.currentSeason }} season
-                    </h2>
+                    <br />
+                    <div class="columns is-multiline">
+                        <div class="column is-6-desktop is-12-mobile is-12-mobile">
+                            <h1 class="title">
+                                Active Skaters
+                            </h1>
+                            <h2 class="subtitle">
+                                A comprehensive look at all active skaters for the {{ this.currentSeason }} season
+                            </h2>
+                        </div>
+                        <div class="column is-6-desktop is-12-tablet is-12-mobile has-text-right">
+                            <div class="select">
+                                <label for="skater-list"></label>
+                                <select id="skater-list" name="skater-list" v-on:change="handleSelect(selected)" v-model="selected">
+                                    <option>Refine by season</option>
+                                    <option v-for="st in seasonStrings">{{ st.season }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <div class="container">
-            <hr/>
+            <hr class="hr" />
         </div>
 
         <SkaterTable :skaters="skaters" v-on:sortSkaters="handleSortEvenEmit"/>
@@ -33,11 +47,14 @@
         data() {
             return {
                 skaters: [],
-                currentSeason: ''
+                currentSeason: '2018-2019',
+                seasonStrings: [],
+                selected: 'Refine by season'
             }
         },
         created() {
-            this.getSkaters('2018-2019', 'points', 'desc');
+            this.getSeasonStrings();
+            this.getSkaters(this.currentSeason, 'points', 'desc');
             this.getCurrentSeasonString();
         },
         methods: {
@@ -62,7 +79,24 @@
                     })
             },
             handleSortEvenEmit(sortQuery) {
-                this.getSkaters('2018-2019', sortQuery.param, sortQuery.value)
+                this.getSkaters(this.currentSeason, sortQuery.param, sortQuery.value)
+            },
+            getSeasonStrings() {
+                axios.get(this.domain + '/api/season-strings')
+                    .then(response => {
+                        this.seasonStrings = response.data.data;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            handleSelect(selection) {
+                if (selection !== 'Refine by season' && selection !== this.currentSeason) {
+                    this.skaters = [];
+                    this.selected = selection;
+                    this.currentSeason = selection;
+                    this.getSkaters(this.selected, 'points', 'desc');
+                }
             }
         }
     }
