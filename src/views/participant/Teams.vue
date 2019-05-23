@@ -78,7 +78,7 @@
                     })
             },
             handleSortEventEmit(sortQuery) {
-                this.getSkaters(this.currentSeason, sortQuery.param, sortQuery.value)
+                this.getTeams(this.currentSeason, sortQuery.param, sortQuery.value)
             },
             getSeasonStrings() {
                 axios.get(this.domain + '/api/season-strings')

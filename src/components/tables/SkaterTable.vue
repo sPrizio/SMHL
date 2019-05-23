@@ -37,7 +37,9 @@
                         </thead>
                         <tbody>
                         <tr v-for="skater in skaters">
-                            <td class="column1" v-bind:class="nameActive">{{ skater.name }}</td>
+                            <td class="column1" v-bind:class="nameActive">
+                                {{ skater.name }}
+                            </td>
                             <td class="column2 smhl-table-centering" v-bind:class="posActive">
                                 {{ skater.position.toString().substr(0, 1) }}
                             </td>
@@ -115,7 +117,7 @@
         data() {
             return {
                 sortIndex: 'p',
-                sortParams: {
+                sortParams: {   //  the param value is the same as that which appears in the api, it corresponds to the db column
                     "name": SortQuery = {
                         param: "last_name",
                         value: ''
@@ -138,7 +140,7 @@
                     },
                     "p": SortQuery = {
                         param: "points",
-                        value: 'desc'
+                        value: 'desc'   //  given an initial value since we default to points sorting on first page load
                     },
                     "ppg": SortQuery = {
                         param: "points_per_game",
