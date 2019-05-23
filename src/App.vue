@@ -90,6 +90,10 @@
         border: 1px solid rgba(215, 215, 215, 0.5);
     }
 
+    .view {
+        min-height: 100vh;
+    }
+
     #app {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;

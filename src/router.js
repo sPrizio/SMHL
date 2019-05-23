@@ -27,6 +27,11 @@ export default new Router({
             component: () => import('./views/participant/Skaters.vue')
         },
         {
+            path: '/goalies',
+            name: 'goalies',
+            component: () => import('./views/participant/Goalies.vue')
+        },
+        {
             path: '/standings',
             name: 'standings',
             component: () => import('./views/participant/Teams.vue')

@@ -1,11 +1,11 @@
 <template>
-    <div id="skaters">
+    <div id="skaters" class="view">
         <section class="hero is-small">
             <div class="hero-body">
                 <div class="container">
                     <br />
                     <div class="columns is-multiline">
-                        <div class="column is-6-desktop is-12-mobile is-12-mobile">
+                        <div class="column is-6-desktop is-12-tablet is-12-mobile">
                             <h1 class="title">
                                 Active Skaters
                             </h1>
@@ -47,7 +47,7 @@
         data() {
             return {
                 skaters: [],
-                currentSeason: '2018-2019',
+                currentSeason: '',
                 seasonStrings: [],
                 selected: 'Refine by season'
             }
