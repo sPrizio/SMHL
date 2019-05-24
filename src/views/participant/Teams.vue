@@ -55,8 +55,8 @@
         },
         created() {
             this.getSeasonStrings();
-            this.getTeams(this.currentSeason, 'points', 'desc');
             this.getCurrentSeasonString();
+            this.getTeams(this.cs, 'points', 'desc');
         },
         methods: {
             getTeams: function (season, field, order) {

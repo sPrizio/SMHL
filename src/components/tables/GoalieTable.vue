@@ -40,33 +40,33 @@
                             <td class="column1" v-bind:class="nameActive">
                                 {{ goalie.name }}
                             </td>
-                            <td class="column2" v-bind:class="posActive">
+                            <td class="column2 smhl-table-centering" v-bind:class="posActive">
                                 {{ goalie.position.toString().substr(0, 1) }}
                             </td>
-                            <td class="column3" v-bind:class="gpActive">
+                            <td class="column3 smhl-table-centering" v-bind:class="gpActive">
                                 {{ goalie.season.gamesPlayed }}
                             </td>
-                            <td class="column4" v-bind:class="wActive">
+                            <td class="column4 smhl-table-centering" v-bind:class="wActive">
                                 {{ goalie.season.wins }}
 
                             </td>
-                            <td class="column5" v-bind:class="lActive">
+                            <td class="column5 smhl-table-centering" v-bind:class="lActive">
                                 {{ goalie.season.losses }}
 
                             </td>
-                            <td class="column6" v-bind:class="tActive">
+                            <td class="column6 smhl-table-centering" v-bind:class="tActive">
                                 {{ goalie.season.ties }}
 
                             </td>
-                            <td class="column7" v-bind:class="saActive">
+                            <td class="column7 smhl-table-centering" v-bind:class="saActive">
                                 {{ goalie.season.shotsAgainst }}
 
                             </td>
-                            <td class="column8" v-bind:class="svpActive">
+                            <td class="column8 smhl-table-centering" v-bind:class="svpActive">
                                 {{ goalie.season.savePercentage }}
 
                             </td>
-                            <td class="column9" v-bind:class="gaaActive">
+                            <td class="column9 smhl-table-centering" v-bind:class="gaaActive">
                                 {{ goalie.season.goalsAgainstAverage }}
 
                             </td>

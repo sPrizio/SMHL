@@ -53,7 +53,9 @@
             }
         },
         created() {
-
+            this.getSeasonStrings();
+            this.getCurrentSeasonString();
+            this.getGoalies(this.cs, 'wins', 'desc')
         },
         methods: {
             getGoalies: function (season, field, order) {
@@ -91,7 +93,7 @@
                     this.goalies = [];
                     this.selected = selection;
                     this.currentSeason = selection;
-                    this.getGoalies(this.selected, 'points', 'desc');
+                    this.getGoalies(this.selected, 'wins', 'desc');
                 }
             }
         }

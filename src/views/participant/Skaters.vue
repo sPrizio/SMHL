@@ -54,8 +54,8 @@
         },
         created() {
             this.getSeasonStrings();
-            this.getSkaters(this.currentSeason, 'points', 'desc');
             this.getCurrentSeasonString();
+            this.getSkaters(this.cs, 'points', 'desc');
         },
         methods: {
 
@@ -76,7 +76,7 @@
                     })
                     .catch(error => {
                         console.log(error)
-                    })
+                    });
             },
             handleSortEventEmit(sortQuery) {
                 this.getSkaters(this.currentSeason, sortQuery.param, sortQuery.value)

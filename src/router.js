@@ -1,6 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
+import Skaters from "./views/participant/Skaters";
+import Goalies from "./views/participant/Goalies";
+import Teams from "./views/participant/Teams";
 
 Vue.use(Router);
 
@@ -24,17 +27,17 @@ export default new Router({
         {
             path: '/skaters',
             name: 'skaters',
-            component: () => import('./views/participant/Skaters.vue')
+            component: Skaters
         },
         {
             path: '/goalies',
             name: 'goalies',
-            component: () => import('./views/participant/Goalies.vue')
+            component: Goalies
         },
         {
             path: '/standings',
             name: 'standings',
-            component: () => import('./views/participant/Teams.vue')
+            component: Teams
         }
     ]
 })
