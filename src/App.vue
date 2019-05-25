@@ -49,7 +49,7 @@
             </div>
         </nav>
         <router-view/>
-        <footer class="footer">
+        <footer class="footer smhl-footer">
             <div class="content has-text-centered">
                 <p>
                     <strong>SMHL &copy;</strong> 2019 All rights reserved
@@ -91,7 +91,11 @@
     }
 
     .view {
-        min-height: 100vh;
+        min-height: 75vh;
+    }
+
+    .smhl-footer {
+        background-color: white !important;
     }
 
     #app {
@@ -185,7 +189,7 @@
         width: 100%;
     }
 
-    table {
+    .smhl-table table {
         border-spacing: 1px;
         border-collapse: collapse;
         background: white;
@@ -196,7 +200,7 @@
         position: relative;
     }
 
-    table thead tr {
+    .smhl-table table thead tr {
         height: 60px;
         background: #36304a;
 
@@ -207,11 +211,11 @@
         }
     }
 
-    table tbody tr {
+    .smhl-table table tbody tr {
         height: 50px;
     }
 
-    table tbody tr:last-child {
+    .smhl-table table tbody tr:last-child {
         border: 0;
     }
 
@@ -223,11 +227,11 @@
         font-weight: unset;
     }
 
-    tbody tr:nth-child(even) {
+    .smhl-table tbody tr:nth-child(even) {
         background-color: #f5f5f5;
     }
 
-    tbody tr {
+    .smhl-table tbody tr {
         font-family: OpenSans-Regular, sans-serif;
         font-size: 15px;
         color: #808080;
@@ -235,7 +239,7 @@
         font-weight: unset;
     }
 
-    tbody tr:hover {
+    .smhl-table tbody tr:hover {
         color: #555555;
         background-color: #f5f5f5;
         cursor: pointer;
@@ -280,27 +284,27 @@
     }
 
     @media screen and (max-width: 992px) {
-        table {
+        .smhl-table table {
             display: block;
         }
-        table > *, table tr, table td, table th {
+        .smhl-table table > *, .smhl-table table tr, .smhl-table table td, .smhl-table table th {
             display: block;
         }
-        table thead {
+        .smhl-table table thead {
             display: none;
         }
-        table tbody tr {
+        .smhl-table table tbody tr {
             height: auto;
             padding: 37px 0;
         }
-        table tbody tr td {
+        .smhl-table table tbody tr td {
             padding-left: 40% !important;
             margin-bottom: 24px;
         }
-        table tbody tr td:last-child {
+        .smhl-table table tbody tr td:last-child {
             margin-bottom: 0;
         }
-        table tbody tr td:before {
+        .smhl-table table tbody tr td:before {
             color: #999999;
             line-height: 1.2;
             position: absolute;
@@ -310,31 +314,31 @@
             text-align: left;
             font-family: OpenSans-Bold, sans-serif;
         }
-        table tbody tr td:nth-child(1):before {
+        .smhl-table table tbody tr td:nth-child(1):before {
             content: "Name";
         }
-        table tbody tr td:nth-child(2):before {
+        .smhl-table table tbody tr td:nth-child(2):before {
             content: "Pos";
         }
-        table tbody tr td:nth-child(3):before {
+        .smhl-table table tbody tr td:nth-child(3):before {
             content: "GP";
         }
-        table tbody tr td:nth-child(4):before {
+        .smhl-table table tbody tr td:nth-child(4):before {
             content: "Goals";
         }
-        table tbody tr td:nth-child(5):before {
+        .smhl-table table tbody tr td:nth-child(5):before {
             content: "Assists";
         }
-        table tbody tr td:nth-child(6):before {
+        .smhl-table table tbody tr td:nth-child(6):before {
             content: "Points";
         }
-        table tbody tr td:nth-child(7):before {
+        .smhl-table table tbody tr td:nth-child(7):before {
             content: "PPG";
         }
-        table tbody tr td:nth-child(8):before {
+        .smhl-table table tbody tr td:nth-child(8):before {
             content: "Shots";
         }
-        table tbody tr td:nth-child(9):before {
+        .smhl-table table tbody tr td:nth-child(9):before {
             content: "BS";
         }
 

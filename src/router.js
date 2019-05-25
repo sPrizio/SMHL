@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Skaters from "./views/participant/Skaters";
 import Goalies from "./views/participant/Goalies";
 import Teams from "./views/participant/Teams";
+import Stats from "./views/Stats";
 
 Vue.use(Router);
 
@@ -15,14 +16,6 @@ export default new Router({
             path: '/',
             name: 'home',
             component: Home
-        },
-        {
-            path: '/about',
-            name: 'about',
-            // route level code-splitting
-            // this generates a separate chunk (about.[hash].js) for this route
-            // which is lazy-loaded when the route is visited.
-            component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
         },
         {
             path: '/skaters',
@@ -38,6 +31,11 @@ export default new Router({
             path: '/standings',
             name: 'standings',
             component: Teams
+        },
+        {
+            path: '/stats',
+            name: 'stats',
+            component: Stats
         }
     ]
 })
