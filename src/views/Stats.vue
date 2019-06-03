@@ -62,7 +62,7 @@
         },
         data() {
             return {
-                activeTab: 'goalies',
+                activeTab: 'players',
                 topPoints: [],
                 topGoals: [],
                 topAssists: [],
@@ -104,6 +104,7 @@
                     axios.get(this.domain + '/api/goalie/top-active?stat=goals_against_average&limit=5')
                 ])
                     .then(axios.spread((winRes, svpRes, gaaRes) => {
+                        console.log(gaaRes);
                         this.topWins = winRes.data.data;
                         this.topSavePercentage = svpRes.data.data;
                         this.topGoalsAgainstAverage = gaaRes.data.data;

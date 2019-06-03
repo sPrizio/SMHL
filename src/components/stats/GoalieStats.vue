@@ -87,7 +87,7 @@
                                 <th class="smhl-stat-table-centering">GAA</th>
                             </tr>
                             <tbody>
-                            <tr v-for="goalie in topWins">
+                            <tr v-for="goalie in topGoalsAgainstAverage">
                                 <td>
                                     {{ goalie.name }}
                                 </td>
