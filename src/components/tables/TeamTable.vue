@@ -62,7 +62,15 @@
                                 {{ team.season.goalsAgainst }}
                             </td>
                             <td class="column9 smhl-table-centering" v-bind:class="diffActive">
-                                {{ team.season.differential }}
+                                <span v-if="team.season.differential > 0" class="is-surplus">
+                                    {{ team.season.differential }}
+                                </span>
+                                <span v-else-if="team.season.differential < 0" class="is-deficit">
+                                    {{ team.season.differential }}
+                                </span>
+                                <span v-else class="is-even">
+                                    {{ team.season.differential }}
+                                </span>
                             </td>
                         </tr>
                         </tbody>
@@ -202,6 +210,18 @@
 
     .is-active {
         background-color: rgba(200, 200, 255, 0.30);
+    }
+
+    .is-surplus {
+        color: green;
+    }
+
+    .is-deficit {
+        color: red;
+    }
+
+    .is-even {
+        color: rgb(175, 175, 0);
     }
 
 </style>
