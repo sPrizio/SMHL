@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    import GoalieTable from "../../components/tables/GoalieTable";
-    import axios from 'axios';
+    import GoalieTable from "../../../components/tables/GoalieTable";
+    import axios from 'axios/index';
 
     export default {
         name: "Goalies",

@@ -19,7 +19,9 @@
                             <tbody>
                             <tr v-for="skater in topPoints">
                                 <td>
-                                    {{ skater.name }}
+                                    <router-link :to="{ name: 'skater', params: { id: skater.code } }" class="participant-link">
+                                        {{ skater.name }}
+                                    </router-link>
                                 </td>
                                 <td class="smhl-stat-table-centering">
                                     {{ skater.position.toString().substring(0, 1) }}
@@ -65,7 +67,9 @@
                         <tbody>
                         <tr v-for="skater in topGoals">
                             <td>
-                                {{ skater.name }}
+                                <router-link :to="{ name: 'skater', params: { id: skater.code } }" class="participant-link">
+                                    {{ skater.name }}
+                                </router-link>
                             </td>
                             <td class="smhl-stat-table-centering">
                                 {{ skater.position.toString().substring(0, 1) }}
@@ -110,7 +114,9 @@
                         <tbody>
                         <tr v-for="skater in topAssists">
                             <td>
-                                {{ skater.name }}
+                                <router-link :to="{ name: 'skater', params: { id: skater.code } }" class="participant-link">
+                                    {{ skater.name }}
+                                </router-link>
                             </td>
                             <td class="smhl-stat-table-centering">
                                 {{ skater.position.toString().substring(0, 1) }}
@@ -153,9 +159,11 @@
                             <th class="smhl-stat-table-centering">PPG</th>
                         </tr>
                         <tbody>
-                        <tr v-for="skater in topPoints">
+                        <tr v-for="skater in topPpg">
                             <td>
-                                {{ skater.name }}
+                                <router-link :to="{ name: 'skater', params: { id: skater.code } }" class="participant-link">
+                                    {{ skater.name }}
+                                </router-link>
                             </td>
                             <td class="smhl-stat-table-centering">
                                 {{ skater.position.toString().substring(0, 1) }}

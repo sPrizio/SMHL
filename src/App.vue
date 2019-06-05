@@ -86,6 +86,16 @@
 
 <style lang="scss">
 
+    .participant-link {
+        text-decoration: none;
+        color: rgb(54, 54, 54);
+
+        &:hover {
+            color: dodgerblue;
+            cursor: pointer;
+        }
+    }
+
     .hr {
         border: 1px solid rgba(215, 215, 215, 0.5);
     }

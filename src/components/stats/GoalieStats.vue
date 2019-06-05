@@ -18,7 +18,9 @@
                             <tbody>
                             <tr v-for="goalie in topWins">
                                 <td>
-                                    {{ goalie.name }}
+                                    <router-link :to="{ name: 'goalie', params: { id: goalie.code } }" class="participant-link">
+                                        {{ goalie.name }}
+                                    </router-link>
                                 </td>
                                 <td class="smhl-stat-table-centering">
                                     {{ goalie.season.gamesPlayed }}
@@ -61,7 +63,9 @@
                             <tbody>
                             <tr v-for="goalie in topSavePercentage">
                                 <td>
-                                    {{ goalie.name }}
+                                    <router-link :to="{ name: 'goalie', params: { id: goalie.code } }" class="participant-link">
+                                        {{ goalie.name }}
+                                    </router-link>
                                 </td>
                                 <td class="smhl-stat-table-centering">
                                     {{ goalie.season.shotsAgainst }}
@@ -108,7 +112,9 @@
                             <tbody>
                             <tr v-for="goalie in topGoalsAgainstAverage">
                                 <td>
-                                    {{ goalie.name }}
+                                    <router-link :to="{ name: 'goalie', params: { id: goalie.code } }" class="participant-link">
+                                        {{ goalie.name }}
+                                    </router-link>
                                 </td>
                                 <td class="smhl-stat-table-centering">
                                     {{ goalie.season.gamesPlayed }}

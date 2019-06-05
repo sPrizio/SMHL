@@ -36,8 +36,8 @@
 </template>
 
 <script>
-    import SkaterTable from "../../components/tables/SkaterTable";
-    import axios from 'axios';
+    import SkaterTable from "../../../components/tables/SkaterTable";
+    import axios from 'axios/index';
 
     export default {
         name: "Skaters",

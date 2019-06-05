@@ -38,7 +38,9 @@
                         <tbody>
                         <tr v-for="skater in skaters">
                             <td class="column1" v-bind:class="nameActive">
-                                {{ skater.name }}
+                                <router-link :to="{ name: 'skater', params: { id: skater.code } }" class="participant-link">
+                                    {{ skater.name }}
+                                </router-link>
                             </td>
                             <td class="column2 smhl-table-centering" v-bind:class="posActive">
                                 {{ skater.position.toString().substr(0, 1) }}
