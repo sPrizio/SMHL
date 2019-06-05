@@ -31,6 +31,16 @@
                                     {{ skater.season.points }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <strong>League Average:</strong>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td class="smhl-stat-table-centering">
+                                    <strong>{{ stats['points']['average'].toFixed(1) }}</strong>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -65,6 +75,16 @@
                             </td>
                             <td class="smhl-stat-table-centering is-active">
                                 {{ skater.season.goals }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>League Average:</strong>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td class="smhl-stat-table-centering">
+                                <strong>{{ stats['goals']['average'].toFixed(1) }}</strong>
                             </td>
                         </tr>
                         </tbody>
@@ -102,6 +122,16 @@
                                 {{ skater.season.points }}
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <strong>League Average:</strong>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td class="smhl-stat-table-centering">
+                                <strong>{{ stats['assists']['average'].toFixed(1) }}</strong>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -137,6 +167,16 @@
                                 {{ skater.season.pointsPerGame }}
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <strong>League Average:</strong>
+                            </td>
+                            <td></td>
+                            <td></td>
+                            <td class="smhl-stat-table-centering">
+                                <strong>{{ stats['pointsPerGame']['average'].toFixed(1) }}</strong>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -152,7 +192,8 @@
             topPoints: Array,
             topGoals: Array,
             topAssists: Array,
-            topPpg: Array
+            topPpg: Array,
+            stats: Object
         }
     }
 </script>

@@ -32,10 +32,12 @@
 
             <!-- stats -->
             <div v-if="activeTab === 'players'">
-                <SkaterStats :top-points="topPoints" :top-goals="topGoals" :top-assists="topAssists" :top-ppg="topPpg"/>
+                <SkaterStats :top-points="topPoints" :top-goals="topGoals" :top-assists="topAssists" :top-ppg="topPpg"
+                             :stats="skaterStats"/>
             </div>
             <div v-else-if="activeTab === 'goalies'">
-                <GoalieStats :top-wins="topWins" :top-save-percentage="topSavePercentage" :top-goals-against-average="topGoalsAgainstAverage" />
+                <GoalieStats :top-wins="topWins" :top-save-percentage="topSavePercentage"
+                             :top-goals-against-average="topGoalsAgainstAverage" :stats="goalieStats"/>
             </div>
         </div>
     </div>
@@ -70,6 +72,8 @@
                 topWins: [],
                 topSavePercentage: [],
                 topGoalsAgainstAverage: [],
+                skaterStats: '',
+                goalieStats: ''
             }
         },
         created() {
@@ -86,12 +90,14 @@
                     axios.get(this.domain + '/api/skater/top-active?stat=goals&limit=5'),
                     axios.get(this.domain + '/api/skater/top-active?stat=assists&limit=5'),
                     axios.get(this.domain + '/api/skater/top-active?stat=points_per_game&limit=5'),
+                    axios.get(this.domain + '/api/skater/stats-for-active?seasonString=' + this.cs)
                 ])
-                    .then(axios.spread((pointsRes, goalsRes, assistsRes, ppgRes) => {
+                    .then(axios.spread((pointsRes, goalsRes, assistsRes, ppgRes, staRes) => {
                         this.topPoints = pointsRes.data.data;
                         this.topGoals = goalsRes.data.data;
                         this.topAssists = assistsRes.data.data;
                         this.topPpg = ppgRes.data.data;
+                        this.skaterStats = staRes.data.data['stats'];
                     }))
                     .catch(error => {
                         console.log(error)
@@ -101,13 +107,14 @@
                 axios.all([
                     axios.get(this.domain + '/api/goalie/top-active?stat=wins&limit=5'),
                     axios.get(this.domain + '/api/goalie/top-active?stat=save_percentage&limit=5'),
-                    axios.get(this.domain + '/api/goalie/top-active?stat=goals_against_average&limit=5')
+                    axios.get(this.domain + '/api/goalie/top-active?stat=goals_against_average&limit=5'),
+                    axios.get(this.domain + '/api/goalie/stats-for-active?seasonString=' + this.cs)
                 ])
-                    .then(axios.spread((winRes, svpRes, gaaRes) => {
-                        console.log(gaaRes);
+                    .then(axios.spread((winRes, svpRes, gaaRes, staRes) => {
                         this.topWins = winRes.data.data;
                         this.topSavePercentage = svpRes.data.data;
                         this.topGoalsAgainstAverage = gaaRes.data.data;
+                        this.goalieStats = staRes.data.data['stats'];
                     }))
                     .catch(error => {
                         console.log(error);

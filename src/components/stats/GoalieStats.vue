@@ -27,6 +27,15 @@
                                     {{ goalie.season.wins }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <strong>League Average:</strong>
+                                </td>
+                                <td></td>
+                                <td class="smhl-stat-table-centering">
+                                    <strong>{{ stats['wins']['average'].toFixed(1) }}</strong>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -62,6 +71,16 @@
                                 </td>
                                 <td class="smhl-stat-table-centering is-active">
                                     {{ goalie.season.savePercentage }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong>League Average:</strong>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td class="smhl-stat-table-centering">
+                                    <strong>{{ this.calcSvpAvg(stats['saves']['sum'], stats['shotsAgainst']['sum']) }}</strong>
                                 </td>
                             </tr>
                             </tbody>
@@ -101,6 +120,16 @@
                                     {{ goalie.season.goalsAgainstAverage }}
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <strong>League Average:</strong>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td class="smhl-stat-table-centering">
+                                    <strong>{{ stats['goalsAgainstAverage']['average'].toFixed(2) }}</strong>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>
@@ -116,7 +145,17 @@
         props: {
             topWins: Array,
             topSavePercentage: Array,
-            topGoalsAgainstAverage: Array
+            topGoalsAgainstAverage: Array,
+            stats: Object
+        },
+        methods: {
+            calcSvpAvg(num1, num2) {
+                if (num2 === 0) {
+                    return 0;
+                }
+
+                return (num1 / num2).toFixed(3);
+            }
         }
     }
 </script>
