@@ -1,12 +1,14 @@
 <template>
     <div>
-        <h1>This is a goalie with id: {{ $route.params.id }}</h1>
+        <GoalieComponent />
     </div>
 </template>
 
 <script>
+    import GoalieComponent from "../../../components/participant/goalie/GoalieComponent";
     export default {
-        name: "Goalie"
+        name: "Goalie",
+        components: {GoalieComponent}
     }
 </script>
 
