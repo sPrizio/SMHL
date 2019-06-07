@@ -27,7 +27,8 @@
                         </ul>
                     </div>
                 </div>
-                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop" v-if="this.activeTab === 'season'">
+                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop"
+                     v-if="this.activeTab === 'season'">
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title">
@@ -36,12 +37,109 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <p>Table</p>
+                                <div class="container-smhl-table">
+                                    <div class="wrap-smhl-table">
+                                        <div class="smhl-table">
+                                            <table>
+                                                <thead>
+                                                <tr class="smhl-table-head noselect">
+                                                    <th class="column1">
+                                                        Season
+                                                    </th>
+                                                    <th class="column2 smhl-table-centering">
+                                                        Position
+                                                    </th>
+                                                    <th class="column3 smhl-table-centering">
+                                                        GP
+                                                    </th>
+                                                    <th class="column4 smhl-table-centering">
+                                                        G
+                                                    </th>
+                                                    <th class="column5 smhl-table-centering">
+                                                        A
+                                                    </th>
+                                                    <th class="column6 smhl-table-centering">
+                                                        P
+                                                    </th>
+                                                    <th class="column7 smhl-table-centering">
+                                                        PPG
+                                                    </th>
+                                                    <th class="column8 smhl-table-centering">
+                                                        S
+                                                    </th>
+                                                    <th class="column9 smhl-table-centering">
+                                                        BS
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td class="column1">
+                                                        {{ skater.season.seasonString }}
+                                                    </td>
+                                                    <td class="column2 smhl-table-centering">
+                                                        {{ skater.position.toString().substr(0, 1) }}
+                                                    </td>
+                                                    <td class="column3 smhl-table-centering">
+                                                        {{ skater.season.gamesPlayed }}
+                                                    </td>
+                                                    <td class="column4 smhl-table-centering">
+                                                        {{ skater.season.goals }}
+                                                    </td>
+                                                    <td class="column5 smhl-table-centering">
+                                                        {{ skater.season.assists }}
+                                                    </td>
+                                                    <td class="column6 smhl-table-centering">
+                                                        {{ skater.season.points }}
+                                                    </td>
+                                                    <td class="column7 smhl-table-centering">
+                                                        {{ skater.season.pointsPerGame }}
+                                                    </td>
+                                                    <td class="column8 smhl-table-centering">
+                                                        {{ skater.season.shots }}
+                                                    </td>
+                                                    <td class="column9 smhl-table-centering">
+                                                        {{ skater.season.blockedShots }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <strong>Season Totals</strong>
+                                                    </td>
+                                                    <td class="column2 smhl-table-centering"></td>
+                                                    <td class="column3 smhl-table-centering">
+                                                        <strong>{{ skater.season.gamesPlayed }}</strong>
+                                                    </td>
+                                                    <td class="column4 smhl-table-centering">
+                                                        <strong>{{ skater.season.goals }}</strong>
+                                                    </td>
+                                                    <td class="column5 smhl-table-centering">
+                                                        <strong>{{ skater.season.assists }}</strong>
+                                                    </td>
+                                                    <td class="column6 smhl-table-centering">
+                                                        <strong>{{ skater.season.points }}</strong>
+                                                    </td>
+                                                    <td class="column7 smhl-table-centering">
+                                                        <strong>{{ skater.season.pointsPerGame }}</strong>
+                                                    </td>
+                                                    <td class="column8 smhl-table-centering">
+                                                        <strong>{{ skater.season.shots }}</strong>
+                                                    </td>
+                                                    <td class="column9 smhl-table-centering">
+                                                        <strong>{{ skater.season.blockedShots }}</strong>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop" v-if="this.activeTab === 'season'">
+                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop"
+                     v-if="this.activeTab === 'season'">
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title">
@@ -55,7 +153,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop" v-if="this.activeTab === 'season'">
+                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop"
+                     v-if="this.activeTab === 'season'">
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title">
@@ -79,7 +178,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop" v-if="this.activeTab === 'career'">
+                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop"
+                     v-if="this.activeTab === 'career'">
                     <div class="card">
                         <header class="card-header">
                             <p class="card-header-title">
@@ -88,7 +188,103 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <p>Table</p>
+                                <div class="container-smhl-table">
+                                    <div class="wrap-smhl-table">
+                                        <div class="smhl-table">
+                                            <table>
+                                                <thead>
+                                                <tr class="smhl-table-head noselect">
+                                                    <th class="column1">
+                                                        Season
+                                                    </th>
+                                                    <th class="column2 smhl-table-centering">
+                                                        Position
+                                                    </th>
+                                                    <th class="column3 smhl-table-centering">
+                                                        GP
+                                                    </th>
+                                                    <th class="column4 smhl-table-centering">
+                                                        G
+                                                    </th>
+                                                    <th class="column5 smhl-table-centering">
+                                                        A
+                                                    </th>
+                                                    <th class="column6 smhl-table-centering">
+                                                        P
+                                                    </th>
+                                                    <th class="column7 smhl-table-centering">
+                                                        PPG
+                                                    </th>
+                                                    <th class="column8 smhl-table-centering">
+                                                        S
+                                                    </th>
+                                                    <th class="column9 smhl-table-centering">
+                                                        BS
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr v-for="s in skater.seasons">
+                                                    <td class="column1">
+                                                        {{ s.seasonString }}
+                                                    </td>
+                                                    <td class="column2 smhl-table-centering">
+                                                        {{ skater.position.toString().substr(0, 1) }}
+                                                    </td>
+                                                    <td class="column3 smhl-table-centering">
+                                                        {{ s.gamesPlayed }}
+                                                    </td>
+                                                    <td class="column4 smhl-table-centering">
+                                                        {{ s.goals }}
+                                                    </td>
+                                                    <td class="column5 smhl-table-centering">
+                                                        {{ s.assists }}
+                                                    </td>
+                                                    <td class="column6 smhl-table-centering">
+                                                        {{ s.points }}
+                                                    </td>
+                                                    <td class="column7 smhl-table-centering">
+                                                        {{ s.pointsPerGame }}
+                                                    </td>
+                                                    <td class="column8 smhl-table-centering">
+                                                        {{ s.shots }}
+                                                    </td>
+                                                    <td class="column9 smhl-table-centering">
+                                                        {{ s.blockedShots }}
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="column1">
+                                                        <strong>Career Totals</strong>
+                                                    </td>
+                                                    <td class="column2 smhl-table-centering"></td>
+                                                    <td class="column3 smhl-table-centering">
+                                                        <strong>{{ skaterStats['gamesPlayed']['sum'] }}</strong>
+                                                    </td>
+                                                    <td class="column4 smhl-table-centering">
+                                                        <strong>{{ skaterStats['goals']['sum'] }}</strong>
+                                                    </td>
+                                                    <td class="column5 smhl-table-centering">
+                                                        <strong>{{ skaterStats['assists']['sum'] }}</strong>
+                                                    </td>
+                                                    <td class="column6 smhl-table-centering">
+                                                        <strong>{{ skaterStats['points']['sum'] }}</strong>
+                                                    </td>
+                                                    <td class="column7 smhl-table-centering">
+                                                        <strong>{{ skaterStats['pointsPerGame']['average'].toFixed(2) }}</strong>
+                                                    </td>
+                                                    <td class="column8 smhl-table-centering">
+                                                        <strong>{{ skaterStats['shots']['sum'] }}</strong>
+                                                    </td>
+                                                    <td class="column9 smhl-table-centering">
+                                                        <strong>{{ skaterStats['blockedShots']['sum'] }}</strong>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -109,6 +305,7 @@
         data: function () {
             return {
                 skater: '',
+                skaterStats: '',
                 activeTab: 'season'
             }
         },
@@ -122,13 +319,17 @@
         },
         methods: {
             getSkater: function () {
-                axios.get(this.domain + '/api/skater/' + this.$route.params.id)
-                    .then(response => {
-                        this.skater = response.data.data
-                    })
+                axios.all([
+                    axios.get(this.domain + '/api/skater/' + this.$route.params.id),
+                    axios.get(this.domain + '/api/skater/stats-for-skater/' + this.$route.params.id)
+                ])
+                    .then(axios.spread((skaRes, staRes) => {
+                        this.skater = skaRes.data.data;
+                        this.skaterStats = staRes.data.data['stats'];
+                    }))
                     .catch(error => {
                         console.log(error)
-                    })
+                    });
             },
             toggleTab: function () {
                 this.activeTab = this.activeTab === 'season' ? 'career' : 'season';
@@ -137,6 +338,10 @@
     }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+
+    .content table th {
+        color: #FFF;
+    }
 
 </style>
