@@ -22,6 +22,11 @@
                         </div>
                     </div>
                     <div class="navbar-end">
+
+                        <router-link to="scores" class="navbar-item">
+                            Scores
+                        </router-link>
+
                         <router-link to="stats" class="navbar-item">
                             Stats
                         </router-link>

@@ -7,6 +7,7 @@ import Teams from "./views/participant/Teams";
 import Stats from "./views/Stats";
 import Skater from "./views/participant/skater/Skater";
 import Goalie from "./views/participant/goalie/Goalie";
+import Scores from "./views/Scores";
 
 Vue.use(Router);
 
@@ -48,6 +49,11 @@ export default new Router({
             path: '/goalie/:id',
             name: 'goalie',
             component: Goalie
+        },
+        {
+            path: '/scores',
+            name: 'scores',
+            component: Scores
         }
     ]
 })
