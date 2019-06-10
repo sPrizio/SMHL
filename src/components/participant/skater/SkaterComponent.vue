@@ -43,31 +43,31 @@
                                             <table>
                                                 <thead>
                                                 <tr class="smhl-table-head noselect">
-                                                    <th class="column1">
+                                                    <th class="column1 th">
                                                         Season
                                                     </th>
-                                                    <th class="column2 smhl-table-centering">
+                                                    <th class="column2 smhl-table-centering th">
                                                         Position
                                                     </th>
-                                                    <th class="column3 smhl-table-centering">
+                                                    <th class="column3 smhl-table-centering th">
                                                         GP
                                                     </th>
-                                                    <th class="column4 smhl-table-centering">
+                                                    <th class="column4 smhl-table-centering th">
                                                         G
                                                     </th>
-                                                    <th class="column5 smhl-table-centering">
+                                                    <th class="column5 smhl-table-centering th">
                                                         A
                                                     </th>
-                                                    <th class="column6 smhl-table-centering">
+                                                    <th class="column6 smhl-table-centering th">
                                                         P
                                                     </th>
-                                                    <th class="column7 smhl-table-centering">
+                                                    <th class="column7 smhl-table-centering th">
                                                         PPG
                                                     </th>
-                                                    <th class="column8 smhl-table-centering">
+                                                    <th class="column8 smhl-table-centering th">
                                                         S
                                                     </th>
-                                                    <th class="column9 smhl-table-centering">
+                                                    <th class="column9 smhl-table-centering th">
                                                         BS
                                                     </th>
                                                 </tr>
@@ -148,7 +148,30 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-                                <p>Table</p>
+                                <table class="table is-fullwidth">
+                                    <thead>
+                                    <tr>
+                                        <th>Opponent</th>
+                                        <th>Date</th>
+                                        <th class="smhl-stat-table-centering">G</th>
+                                        <th class="smhl-stat-table-centering">A</th>
+                                        <th class="smhl-stat-table-centering">P</th>
+                                        <th class="smhl-stat-table-centering">S</th>
+                                        <th class="smhl-stat-table-centering">BS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr v-for="game in recentGames">
+                                        <td>{{ game.team.name }}</td>
+                                        <td>{{ formatDate(game.gameTime.toString()) }}</td>
+                                        <td class="smhl-stat-table-centering">{{ game.goals }}</td>
+                                        <td class="smhl-stat-table-centering">{{ game.assists }}</td>
+                                        <td class="smhl-stat-table-centering">{{ game.points }}</td>
+                                        <td class="smhl-stat-table-centering">{{ game.shots }}</td>
+                                        <td class="smhl-stat-table-centering">{{ game.blockedShots }}</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -194,31 +217,31 @@
                                             <table>
                                                 <thead>
                                                 <tr class="smhl-table-head noselect">
-                                                    <th class="column1">
+                                                    <th class="column1 th">
                                                         Season
                                                     </th>
-                                                    <th class="column2 smhl-table-centering">
+                                                    <th class="column2 smhl-table-centering th">
                                                         Position
                                                     </th>
-                                                    <th class="column3 smhl-table-centering">
+                                                    <th class="column3 smhl-table-centering th">
                                                         GP
                                                     </th>
-                                                    <th class="column4 smhl-table-centering">
+                                                    <th class="column4 smhl-table-centering th">
                                                         G
                                                     </th>
-                                                    <th class="column5 smhl-table-centering">
+                                                    <th class="column5 smhl-table-centering th">
                                                         A
                                                     </th>
-                                                    <th class="column6 smhl-table-centering">
+                                                    <th class="column6 smhl-table-centering th">
                                                         P
                                                     </th>
-                                                    <th class="column7 smhl-table-centering">
+                                                    <th class="column7 smhl-table-centering th">
                                                         PPG
                                                     </th>
-                                                    <th class="column8 smhl-table-centering">
+                                                    <th class="column8 smhl-table-centering th">
                                                         S
                                                     </th>
-                                                    <th class="column9 smhl-table-centering">
+                                                    <th class="column9 smhl-table-centering th">
                                                         BS
                                                     </th>
                                                 </tr>
@@ -296,6 +319,7 @@
 
 <script>
     import axios from 'axios';
+    import moment from 'moment';
 
     export default {
         name: "SkaterComponent",
@@ -306,6 +330,7 @@
             return {
                 skater: '',
                 skaterStats: '',
+                recentGames: '',
                 activeTab: 'season'
             }
         },
@@ -321,11 +346,13 @@
             getSkater: function () {
                 axios.all([
                     axios.get(this.domain + '/api/skater/' + this.$route.params.id),
-                    axios.get(this.domain + '/api/skater/stats-for-skater/' + this.$route.params.id)
+                    axios.get(this.domain + '/api/skater/stats-for-skater/' + this.$route.params.id),
+                    axios.get(this.domain + '/api/skater/recent-games/' + this.$route.params.id + '?limit=' + this.recentGamesLimit)
                 ])
-                    .then(axios.spread((skaRes, staRes) => {
+                    .then(axios.spread((skaRes, staRes, rgRes) => {
                         this.skater = skaRes.data.data;
                         this.skaterStats = staRes.data.data['stats'];
+                        this.recentGames = rgRes.data.data;
                     }))
                     .catch(error => {
                         console.log(error)
@@ -333,6 +360,9 @@
             },
             toggleTab: function () {
                 this.activeTab = this.activeTab === 'season' ? 'career' : 'season';
+            },
+            formatDate: function(date) {
+                return moment(date).format('MMM DD');
             }
         }
     }
@@ -340,8 +370,12 @@
 
 <style scoped lang="scss">
 
-    .content table th {
+    .content table .th {
         color: #FFF;
+    }
+
+    .smhl-stat-table-centering {
+        text-align: center !important;
     }
 
 </style>

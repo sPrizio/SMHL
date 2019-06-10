@@ -1,36 +1,38 @@
 <template>
-    <section class="hero is-white">
-        <div class="hero-body">
-            <div class="container">
-                <div class="columns is-multiline">
-                    <div class="column is-6-desktop is-12-tablet is-12-mobile">
-                        <h1 class="title">
-                            Scores
-                        </h1>
-                        <h2 class="subtitle">
-                            A look at previous and upcoming games for a season
-                        </h2>
-                    </div>
-                    <div class="column is-6-desktop is-12-tablet is-12-mobile has-text-right">
-                        <div class="select">
-                            <label for="season-list"></label>
-                            <select id="season-list" name="season-list" v-on:change="handleSelect(selected)"
-                                    v-model="selected">
-                                <option>Refine by season</option>
-                                <option v-for="st in seasonStrings">{{ st.season }}</option>
-                            </select>
+    <div id="scores">
+        <section class="hero is-white">
+            <div class="hero-body">
+                <div class="container">
+                    <div class="columns is-multiline">
+                        <div class="column is-6-desktop is-12-tablet is-12-mobile">
+                            <h1 class="title">
+                                Scores
+                            </h1>
+                            <h2 class="subtitle">
+                                A look at previous and upcoming games for a season
+                            </h2>
+                        </div>
+                        <div class="column is-6-desktop is-12-tablet is-12-mobile has-text-right">
+                            <div class="select">
+                                <label for="season-list"></label>
+                                <select id="season-list" name="season-list" v-on:change="handleSelect(selected)"
+                                        v-model="selected">
+                                    <option>Refine by season</option>
+                                    <option v-for="st in seasonStrings">{{ st.season }}</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </section>
+
+        <div class="container">
+            <hr class="hr"/>
         </div>
-    </section>
 
-    <div class="container">
-        <hr class="hr" />
+        <!-- TODO: implement game table component -->
     </div>
-
-    <!-- TODO: implement game table component -->
 </template>
 
 <script>

@@ -20,6 +20,9 @@ Vue.mixin({
                 } else {
                     return (t.getFullYear()).toString() + '-' + (t.getFullYear() + 1).toString()
                 }
+            },
+            get recentGamesLimit() {
+                return 5;
             }
         }
     }
