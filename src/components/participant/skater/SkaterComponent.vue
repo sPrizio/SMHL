@@ -7,7 +7,7 @@
                         {{ this.skater.name }}
                     </h1>
                     <h2 class="subtitle">
-                        {{ this.skater.position }}
+                        {{ formatPosition(this.skater.position) }}
                     </h2>
                 </div>
             </div>
@@ -367,6 +367,9 @@
             },
             formatDate: function (date) {
                 return moment(date).format('MMM DD');
+            },
+            formatPosition: function (string) {
+                return string.replace('_', ' ');
             }
         }
     }

@@ -23,15 +23,15 @@
                     </div>
                     <div class="navbar-end">
 
-                        <router-link to="scores" class="navbar-item">
+                        <router-link to="/scores" class="navbar-item">
                             Scores
                         </router-link>
 
-                        <router-link to="stats" class="navbar-item">
+                        <router-link to="/stats" class="navbar-item">
                             Stats
                         </router-link>
 
-                        <router-link to="standings" class="navbar-item">
+                        <router-link to="/standings" class="navbar-item">
                             Standings
                         </router-link>
 
@@ -41,10 +41,10 @@
                             </a>
 
                             <div class="navbar-dropdown">
-                                <router-link to="skaters" class="navbar-item">
+                                <router-link to="/skaters" class="navbar-item">
                                     Skaters
                                 </router-link>
-                                <router-link to="goalies" class="navbar-item">
+                                <router-link to="/goalies" class="navbar-item">
                                     Goalies
                                 </router-link>
                             </div>
