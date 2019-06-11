@@ -187,14 +187,10 @@
                         <div class="card-content">
                             <div class="content">
                                 <div class="columns is-multiline has-text-centered">
-                                    <div class="column is-4-desktop is-6-tablet is-12-mobile">
-                                        <p>Milestone 1</p>
-                                    </div>
-                                    <div class="column is-4-desktop is-6-tablet is-12-mobile">
-                                        <p>Milestone 2</p>
-                                    </div>
-                                    <div class="column is-4-desktop is-6-tablet is-12-mobile">
-                                        <p>Milestone 3</p>
+                                    <div class="column is-4-desktop is-6-tablet is-12-mobile" v-for="m in milestone">
+                                        <p>{{ m.name }}</p>
+                                        <p>{{ m.value }}</p>
+                                        <p>{{ m.plateau }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -294,7 +290,8 @@
                                                         <strong>{{ skaterStats['points']['sum'] }}</strong>
                                                     </td>
                                                     <td class="column7 smhl-table-centering">
-                                                        <strong>{{ skaterStats['pointsPerGame']['average'].toFixed(2) }}</strong>
+                                                        <strong>{{ skaterStats['pointsPerGame']['average'].toFixed(2)
+                                                            }}</strong>
                                                     </td>
                                                     <td class="column8 smhl-table-centering">
                                                         <strong>{{ skaterStats['shots']['sum'] }}</strong>
@@ -331,7 +328,8 @@
                 skater: '',
                 skaterStats: '',
                 recentGames: '',
-                activeTab: 'season'
+                milestone: [],
+                activeTab: 'season',
             }
         },
         computed: {
@@ -347,12 +345,18 @@
                 axios.all([
                     axios.get(this.domain + '/api/skater/' + this.$route.params.id),
                     axios.get(this.domain + '/api/skater/stats-for-skater/' + this.$route.params.id),
-                    axios.get(this.domain + '/api/skater/recent-games/' + this.$route.params.id + '?limit=' + this.recentGamesLimit)
+                    axios.get(this.domain + '/api/skater/recent-games/' + this.$route.params.id + '?limit=' + this.recentGamesLimit),
+                    axios.get(this.domain + '/api/skater/milestone/' + this.$route.params.id + '?stat=gp'),
+                    axios.get(this.domain + '/api/skater/milestone/' + this.$route.params.id + '?stat=goals'),
+                    axios.get(this.domain + '/api/skater/milestone/' + this.$route.params.id + '?stat=points')
                 ])
-                    .then(axios.spread((skaRes, staRes, rgRes) => {
+                    .then(axios.spread((skaRes, staRes, rgRes, m1Res, m2Res, m3Res) => {
                         this.skater = skaRes.data.data;
                         this.skaterStats = staRes.data.data['stats'];
                         this.recentGames = rgRes.data.data;
+                        this.milestone.push(m3Res.data.data);
+                        this.milestone.push(m2Res.data.data);
+                        this.milestone.push(m1Res.data.data);
                     }))
                     .catch(error => {
                         console.log(error)
@@ -361,7 +365,7 @@
             toggleTab: function () {
                 this.activeTab = this.activeTab === 'season' ? 'career' : 'season';
             },
-            formatDate: function(date) {
+            formatDate: function (date) {
                 return moment(date).format('MMM DD');
             }
         }

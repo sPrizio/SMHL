@@ -3,8 +3,11 @@ import App from './App.vue'
 import router from './router'
 import './registerServiceWorker'
 import './../node_modules/bulma/css/bulma.css'
+import VueProgress from 'vue-progress';
 
 Vue.config.productionTip = false;
+
+Vue.use(VueProgress);
 
 Vue.mixin({
     data: function () {
