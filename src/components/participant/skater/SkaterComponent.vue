@@ -191,6 +191,7 @@
                                         <p>{{ m.name }}</p>
                                         <p>{{ m.value }}</p>
                                         <p>{{ m.plateau }}</p>
+                                        <progress class="progress is-large" :value="(m.value / m.plateau).toFixed(1)" :max="1.0"></progress>
                                     </div>
                                 </div>
                             </div>

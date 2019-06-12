@@ -29,18 +29,23 @@
 
         <div class="container">
             <hr class="hr"/>
-        </div>
 
-        <!-- TODO: implement game table component -->
+            <div class="columns is-multiline">
+                <div class="column is-12" v-for="game in games" v-if="games.length > 0">
+                    <GamesComponent :game="game" />
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
     import axios from 'axios';
+    import GamesComponent from "../components/game/GamesComponent";
 
     export default {
         name: "Scores",
-        components: {},
+        components: {GamesComponent},
         data() {
             return {
                 games: [],
@@ -56,7 +61,7 @@
         },
         methods: {
             getGames: function (season) {
-                axios.get(this.domain + '/api/game/all-for-season?seasonString' + season)
+                axios.get(this.domain + '/api/game/all-for-season?seasonString=' + season)
                     .then(response => {
                         this.games = response.data.data;
                     })
@@ -68,6 +73,15 @@
                 axios.get(this.domain + '/api/season-strings')
                     .then(response => {
                         this.seasonStrings = response.data.data;
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            },
+            getCurrentSeasonString: function () {
+                axios.get(this.domain + '/api/current-season')
+                    .then(response => {
+                        this.currentSeason = response.data.data;
                     })
                     .catch(error => {
                         console.log(error)
