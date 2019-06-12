@@ -55,7 +55,28 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="content">
-                                        Home Goalie Game Details
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>Goalie</th>
+                                                <th class="smhl-stat-table-centering">W/L</th>
+                                                <th class="smhl-stat-table-centering">SA</th>
+                                                <th class="smhl-stat-table-centering">Svs</th>
+                                                <th class="smhl-stat-table-centering">Sv%</th>
+                                                <th class="smhl-stat-table-centering">GA</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="details in game.gameDetails.goalieGameDetails" v-if="details.team.code === game.homeTeam.code">
+                                                <td>{{ details.goalie.name }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.gameResult.toString().substring(0, 1) }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.shotsAgainst }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.saves }}</td>
+                                                <td class="smhl-stat-table-centering">{{ (details.saves / details.shotsAgainst).toFixed(3) }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.goalsAgainst }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -64,7 +85,28 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="content">
-                                        Home Player Game Details
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>Skater</th>
+                                                <th class="smhl-stat-table-centering">G</th>
+                                                <th class="smhl-stat-table-centering">A</th>
+                                                <th class="smhl-stat-table-centering">P</th>
+                                                <th class="smhl-stat-table-centering">S</th>
+                                                <th class="smhl-stat-table-centering">BS</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="details in game.gameDetails.skaterGameDetails" v-if="details.team.code === game.homeTeam.code">
+                                                <td>{{ details.skater.name }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.goals }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.assists }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.points }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.shots }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.blockedShots }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +120,28 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="content">
-                                        Away Goalie Game Details
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>Goalie</th>
+                                                <th class="smhl-stat-table-centering">W/L</th>
+                                                <th class="smhl-stat-table-centering">SA</th>
+                                                <th class="smhl-stat-table-centering">Svs</th>
+                                                <th class="smhl-stat-table-centering">Sv%</th>
+                                                <th class="smhl-stat-table-centering">GA</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="details in game.gameDetails.goalieGameDetails" v-if="details.team.code === game.awayTeam.code">
+                                                <td>{{ details.goalie.name }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.gameResult.toString().substring(0, 1) }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.shotsAgainst }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.saves }}</td>
+                                                <td class="smhl-stat-table-centering">{{ (details.saves / details.shotsAgainst).toFixed(3) }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.goalsAgainst }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +150,28 @@
                             <div class="card">
                                 <div class="card-content">
                                     <div class="content">
-                                        Away Player Game Details
+                                        <table>
+                                            <thead>
+                                            <tr>
+                                                <th>Skater</th>
+                                                <th class="smhl-stat-table-centering">G</th>
+                                                <th class="smhl-stat-table-centering">A</th>
+                                                <th class="smhl-stat-table-centering">P</th>
+                                                <th class="smhl-stat-table-centering">S</th>
+                                                <th class="smhl-stat-table-centering">BS</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr v-for="details in game.gameDetails.skaterGameDetails" v-if="details.team.code === game.awayTeam.code">
+                                                <td>{{ details.skater.name }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.goals }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.assists }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.points }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.shots }}</td>
+                                                <td class="smhl-stat-table-centering">{{ details.blockedShots }}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                             </div>
@@ -141,5 +225,13 @@
 </script>
 
 <style scoped lang="scss">
+
+    .content table .th {
+        color: #FFF;
+    }
+
+    .smhl-stat-table-centering {
+        text-align: center !important;
+    }
 
 </style>
