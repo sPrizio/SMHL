@@ -9,6 +9,7 @@ import Skater from "./views/participant/skater/Skater";
 import Goalie from "./views/participant/goalie/Goalie";
 import Scores from "./views/Scores";
 import Game from "./views/game/Game";
+import CreateGame from "./views/game/CreateGame";
 
 Vue.use(Router);
 
@@ -60,6 +61,11 @@ export default new Router({
             path: '/game/:id',
             name: 'game',
             component: Game
+        },
+        {
+            path: '/create-game',
+            name: 'createGame',
+            component: CreateGame
         }
     ]
 })

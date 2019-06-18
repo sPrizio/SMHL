@@ -184,18 +184,15 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     export default {
         name: "GameComponent",
+        props: {
+            game: Object
+        },
         data: function () {
             return {
-                game: '',
                 activeTab: 'home'
             }
-        },
-        created () {
-          this.getGame();
         },
         computed: {
             activeHome: function () {
@@ -206,17 +203,6 @@
             }
         },
         methods: {
-            getGame: function () {
-                axios.all([
-                    axios.get(this.domain + '/api/game/' + this.$route.params.id)
-                ])
-                    .then(axios.spread((gRes) => {
-                        this.game = gRes.data.data;
-                    }))
-                    .catch(error => {
-                        console.log(error)
-                    })
-            },
             toggleTab: function () {
                 this.activeTab = this.activeTab === 'home' ? 'away' : 'home';
             },

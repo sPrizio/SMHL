@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="card">
+        <div class="card" v-if="game.gameStatus === 'COMPLETE'">
             <div class="card-content">
                 <div class="content">
                     <div class="columns is-multiline">
@@ -35,6 +35,25 @@
                             <router-link :to="{ name: 'game', params: { id: game.code } }">
                                 Score sheet
                             </router-link>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card" v-else>
+            <div class="card-content">
+                <div class="content">
+                    <div class="columns is-multiline">
+                        <div class="column is-3">
+                            <p>0 | {{ game.homeTeam.name }}</p>
+                            <p>0 | {{ game.awayTeam.name }}</p>
+                        </div>
+                        <div class="column is-5 has-text-centered">
+                            <p>This game has not yet started</p>
+                        </div>
+                        <div class="column is-4 has-text-centered">
+                            <p>{{ formatDate(game.gameTime) }}</p>
+                            <small>{{ formatTime(game.gameTime) }}</small>
                         </div>
                     </div>
                 </div>
