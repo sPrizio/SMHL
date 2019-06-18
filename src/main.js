@@ -13,7 +13,7 @@ Vue.mixin({
     data: function () {
         return {
             get domain() {
-                return 'http://localhost:8080/'
+                return 'https://hdm-api.herokuapp.com/'
             },
             get cs() {
                 let t = new Date();
