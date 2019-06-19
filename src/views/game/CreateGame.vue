@@ -60,7 +60,7 @@
                                     <div class="control">
                                         <div class="select is-rounded is-fullwidth">
                                             <select id="homeTeam" name="homeTeam" v-model="hT">
-                                                <option v-for="t in teams">{{ t.name }}</option>
+                                                <option v-for="t in teams" :value="t.code">{{ t.name }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
                                     <div class="control">
                                         <div class="select is-rounded is-fullwidth">
                                             <select id="awayTeam" name="awayTeam" v-model="aT">
-                                                <option v-for="t in teams">{{ t.name }}</option>
+                                                <option v-for="t in teams" :value="t.code">{{ t.name }}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -139,7 +139,7 @@
                     })
             },
             submitForm() {
-                axios.post('/api/game/create', {
+                axios.post(this.domain + '/api/game/create', {
                     gameTime: this.gT,
                     seasonString: this.sS,
                     gameStatus: this.gS,
@@ -147,7 +147,11 @@
                     awayTeam: this.aT
                 })
                     .then(response => {
-                        console.log(response)
+                        if (response.data.data.result === 'SUCCESSFUL') {
+                            this.$router.push('scores')
+                        } else {
+                            console.log(response)
+                        }
                     })
                     .catch(error => {
                         console.log(error)
