@@ -147,7 +147,7 @@
                     awayTeam: this.aT
                 })
                     .then(response => {
-                        if (response.data.data.result === 'SUCCESSFUL') {
+                        if (response.data.response === 'SUCCESS') {
                             this.$router.push('scores')
                         } else {
                             console.log(response)
