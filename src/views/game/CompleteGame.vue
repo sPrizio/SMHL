@@ -17,6 +17,10 @@
             <hr class="hr"/>
 
             <h2 class="subtitle">TODO</h2>
+            <h3>Red = No yet started</h3>
+            <h3>Yellow = UI complete, data is not ready for axios post</h3>
+            <h3>Green = Good to go to back end</h3>
+            <br />
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
                     <article class="tile is-child notification is-danger">
@@ -35,7 +39,7 @@
                 <div class="tile is-vertical is-7">
                     <div class="tile">
                         <div class="tile is-parent is-vertical">
-                            <article class="tile is-child notification is-danger">
+                            <article class="tile is-child notification is-warning">
                                 <p class="title">SkaterGameDetails</p>
                                 <p class="subtitle">gameTime | LocalDateTime</p>
                                 <p class="subtitle">participant | Skater</p>
@@ -45,7 +49,7 @@
                                 <p class="subtitle">shots | Integer</p>
                                 <p class="subtitle">blockedShots | Integer</p>
                             </article>
-                            <article class="tile is-child notification is-danger">
+                            <article class="tile is-child notification is-warning">
                                 <p class="title">TeamGameDetails</p>
                                 <p class="subtitle">gameTime | LocalDateTime</p>
                                 <p class="subtitle">participant | Team</p>
@@ -55,7 +59,7 @@
                             </article>
                         </div>
                         <div class="tile is-parent is-vertical">
-                            <article class="tile is-child notification is-danger">
+                            <article class="tile is-child notification is-warning">
                                 <p class="title">GoalieGameDetails</p>
                                 <p class="subtitle">gameTime | LocalDateTime</p>
                                 <p class="subtitle">participant | Goalie</p>
@@ -66,7 +70,7 @@
                                 <p class="subtitle">saves | Integer</p>
                                 <p class="subtitle">goalsAgainst | Integer</p>
                             </article>
-                            <article class="tile is-child notification is-danger">
+                            <article class="tile is-child notification is-warning">
                                 <p class="title">ScoringPlays</p>
                                 <p class="subtitle">team | Team</p>
                                 <p class="subtitle">scoringSkater | Skater</p>
@@ -111,38 +115,80 @@
                             <div class="content">
                                 <div class="columns is-multiline">
                                     <div class="column is-4-desktop is-12-tablet is-12-mobile">
-                                        <p class="subtitle">Goalies</p>
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="subtitle">Goalie Details</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <div class="button is-success" v-on:click="addGoalie('home')">
+                                                        Add
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="button is-light" v-on:click="removeGoalie('home')">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                        <hr class="hr"/>
+                                        <div v-for="(gGD, index) in homeGoalieGameDetails">
+                                            <GoalieGameDetailsComponent :goalies="goalies" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.homeTeam.code"/>
+                                        </div>
+                                    </div>
+                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="subtitle">Skater Details</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <div class="button is-success" v-on:click="addSkater('home')">
+                                                        Add
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="button is-light" v-on:click="removeSkater('home')">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                        <hr class="hr"/>
+                                        <div v-for="(sGD, index) in homeSkaterGameDetails">
+                                            <SkaterGameDetailsComponent :skaters="skaters" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.homeTeam.code"/>
+                                        </div>
+                                    </div>
+                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
+                                        <p class="subtitle">
+                                            Team Details
+                                        </p>
                                         <hr class="hr"/>
                                         <div class="columns is-multiline">
-                                            <div class="column is-6">
+                                            <div class="column is-4">
                                                 <div class="field">
-                                                    <label for="goalieName" class="label">Goalie</label>
+                                                    <label for="homeGameResult" class="label">Result</label>
                                                     <div class="control">
-                                                        <div class="select">
-                                                            <select id="goalieName" name="goalieName">
-                                                                <option>Select dropdown</option>
-                                                                <option>With options</option>
+                                                        <div class="select is-fullwidth">
+                                                            <select id="homeGameResult" name="homeGameResult">
+                                                                <option>Win</option>
+                                                                <option>Loss</option>
+                                                                <option>Tie</option>
                                                             </select>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="column is-6">
-                                                <div class="field">
-                                                    <div class="control">
-                                                        <br/>
-                                                        <label class="checkbox">
-                                                            <input type="checkbox">
-                                                            Started Game?
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            </div>
                                             <div class="column is-4">
                                                 <div class="field">
                                                     <div class="control">
-                                                        <label for="shotsAgainst" class="label">Shots Against</label>
-                                                        <input id="shotsAgainst" name="shotsAgainst" class="input"
+                                                        <label for="homeGoalsFor" class="label">Goals For</label>
+                                                        <input id="homeGoalsFor" name="homeGoalsFor" class="input"
                                                                type="number" placeholder="0"/>
                                                     </div>
                                                 </div>
@@ -150,40 +196,46 @@
                                             <div class="column is-4">
                                                 <div class="field">
                                                     <div class="control">
-                                                        <label for="saves" class="label">Saves</label>
-                                                        <input id="saves" name="saves" class="input" type="number"
-                                                               placeholder="0"/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="column is-4">
-                                                <div class="field">
-                                                    <div class="control">
-                                                        <label for="goalsAgainst" class="label">Goals Against</label>
-                                                        <input id="goalsAgainst" name="goalsAgainst" class="input"
+                                                        <label for="homeGoalsAgainst" class="label">Goals Against</label>
+                                                        <input id="homeGoalsAgainst" name="homeGoalsAgainst" class="input"
                                                                type="number" placeholder="0"/>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
-                                        <p class="subtitle">
-                                            Skaters
-                                        </p>
-                                        <hr class="hr"/>
-                                    </div>
-                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
-                                        <p class="subtitle">
-                                            Team
-                                        </p>
                                         <hr class="hr"/>
                                     </div>
                                     <div class="column is-12">
-                                        <p class="subtitle">
-                                            Scoring Plays
-                                        </p>
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="subtitle">
+                                                        Scoring Plays
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <div class="button is-success" v-on:click="addScoringPlay('home')">
+                                                        Add
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="button is-light" v-on:click="removeScoringPlay('home')">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
                                         <hr class="hr"/>
+                                        <div v-if="homeScoringPlays.length > 0" v-for="sp in homeScoringPlays">
+                                            <ScoringPlayComponent :skaters="skaters" :team="game.homeTeam.code"/>
+                                        </div>
+                                        <div v-if="homeScoringPlays.length === 0" class="has-text-centered">
+                                            <p class="subtitle">
+                                                There were no scoring plays for this team.
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -199,7 +251,131 @@
                         </header>
                         <div class="card-content">
                             <div class="content">
-
+                                <div class="columns is-multiline">
+                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="subtitle">Goalie Details</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <div class="button is-success" v-on:click="addGoalie('away')">
+                                                        Add
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="button is-light" v-on:click="removeGoalie('away')">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                        <hr class="hr"/>
+                                        <div v-for="(gGD, index) in awayGoalieGameDetails">
+                                            <GoalieGameDetailsComponent :goalies="goalies" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.awayTeam.code"/>
+                                        </div>
+                                    </div>
+                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="subtitle">Skater Details</p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <div class="button is-success" v-on:click="addSkater('away')">
+                                                        Add
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="button is-light" v-on:click="removeSkater('away')">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                        <hr class="hr"/>
+                                        <div v-for="(sGD, index) in awaySkaterGameDetails">
+                                            <SkaterGameDetailsComponent :skaters="skaters" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.awayTeam.code"/>
+                                        </div>
+                                    </div>
+                                    <div class="column is-4-desktop is-12-tablet is-12-mobile">
+                                        <p class="subtitle">
+                                            Team Details
+                                        </p>
+                                        <hr class="hr"/>
+                                        <div class="columns is-multiline">
+                                            <div class="column is-4">
+                                                <div class="field">
+                                                    <label for="awayGameResult" class="label">Result</label>
+                                                    <div class="control">
+                                                        <div class="select is-fullwidth">
+                                                            <select id="awayGameResult" name="awayGameResult">
+                                                                <option>Win</option>
+                                                                <option>Loss</option>
+                                                                <option>Tie</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column is-4">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <label for="awayGoalsFor" class="label">Goals For</label>
+                                                        <input id="awayGoalsFor" name="awayGoalsFor" class="input"
+                                                               type="number" placeholder="0"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column is-4">
+                                                <div class="field">
+                                                    <div class="control">
+                                                        <label for="awayGoalsAgainst" class="label">Goals Against</label>
+                                                        <input id="awayGoalsAgainst" name="awayGoalsAgainst" class="input"
+                                                               type="number" placeholder="0"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <hr class="hr"/>
+                                    </div>
+                                    <div class="column is-12">
+                                        <nav class="level">
+                                            <div class="level-left">
+                                                <div class="level-item">
+                                                    <p class="subtitle">
+                                                        Scoring Plays
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="level-right">
+                                                <div class="level-item">
+                                                    <div class="button is-success" v-on:click="addScoringPlay('away')">
+                                                        Add
+                                                    </div>
+                                                </div>
+                                                <div class="level-item">
+                                                    <div class="button is-light" v-on:click="removeScoringPlay('away')">
+                                                        Remove
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </nav>
+                                        <hr class="hr"/>
+                                        <div v-if="awayScoringPlays.length > 0" v-for="sp in awayScoringPlays">
+                                            <ScoringPlayComponent :skaters="skaters" :team="game.awayTeam.code"/>
+                                        </div>
+                                        <div v-if="awayScoringPlays.length === 0" class="has-text-centered">
+                                            <p class="subtitle">
+                                                There were no scoring plays for this team.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -211,16 +387,32 @@
 
 <script>
     import axios from 'axios';
+    import GoalieGameDetailsComponent from "../../components/game/details/GoalieGameDetailsComponent";
+    import SkaterGameDetailsComponent from "../../components/game/details/SkaterGameDetailsComponent";
+    import ScoringPlayComponent from "../../components/game/details/ScoringPlayComponent";
 
     export default {
         name: "CompleteGame",
+        components: {ScoringPlayComponent, SkaterGameDetailsComponent, GoalieGameDetailsComponent},
         data: function () {
             return {
-                game: ''
+                game: '',
+                homeGoalieGameDetails: [],
+                awayGoalieGameDetails: [],
+                homeSkaterGameDetails: [],
+                awaySkaterGameDetails: [],
+                homeScoringPlays: [],
+                awayScoringPlays: [],
+                goalies: [],
+                skaters: [],
             }
         },
         created() {
             this.getGame();
+            this.addGoalie('home');
+            this.addGoalie('away');
+            this.addSkater('home');
+            this.addSkater('away');
         },
         methods: {
             getGame: function () {
@@ -234,10 +426,65 @@
                         console.log(error)
                     })
             },
+            addGoalie(side) {
+                if (side === 'home') {
+                    this.homeGoalieGameDetails.push('goalie');
+                } else {
+                    this.awayGoalieGameDetails.push('goalie');
+                }
+            },
+            removeGoalie(side) {
+                if (side === 'home') {
+                    if (this.homeGoalieGameDetails.length > 1) {
+                        this.homeGoalieGameDetails.pop();
+                    }
+                } else {
+                    if (this.awayGoalieGameDetails.length > 1) {
+                        this.awayGoalieGameDetails.pop();
+                    }
+                }
+            },
+            addSkater(side) {
+                if (side === 'home') {
+                    this.homeSkaterGameDetails.push('skater');
+                } else {
+                    this.awaySkaterGameDetails.push('skater');
+                }
+            },
+            removeSkater(side) {
+                if (side === 'home') {
+                    if (this.homeSkaterGameDetails.length > 1) {
+                        this.homeSkaterGameDetails.pop();
+                    }
+                } else {
+                    if (this.awaySkaterGameDetails.length > 1) {
+                        this.awaySkaterGameDetails.pop();
+                    }
+                }
+            },
+            addScoringPlay(side) {
+                if (side === 'home') {
+                    this.homeScoringPlays.push('scoringPlay');
+                } else {
+                    this.awayScoringPlays.push('scoringPlay');
+                }
+            },
+            removeScoringPlay(side) {
+                if (side === 'home') {
+                    this.homeScoringPlays.pop();
+                } else {
+                    this.awayScoringPlays.pop();
+                }
+            }
         }
     }
 </script>
 
 <style scoped lang="scss">
+
+    .bordered {
+        border: 2px solid rgba(155, 155, 255, 0.25);
+        border-radius: 25px;
+    }
 
 </style>
