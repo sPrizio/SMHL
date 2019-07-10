@@ -6,8 +6,8 @@
                     <label for="goalieName" class="label">Goalie {{ count }}</label>
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="goalieName" name="goalieName">
-                                <option v-for="goalie in goalies">{{ goalie.name }}</option>
+                            <select id="goalieName" name="goalieName" v-model="goalie">
+                                <option v-for="goalie in goalies" :value="goalie.code">{{ goalie.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -18,10 +18,10 @@
                     <label for="gameResult" class="label">Result</label>
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="gameResult" name="gameResult">
-                                <option>Win</option>
-                                <option>Loss</option>
-                                <option>Tie</option>
+                            <select id="gameResult" name="gameResult" v-model="result">
+                                <option :value="'win'">Win</option>
+                                <option :value="'loss'">Loss</option>
+                                <option :value="'tie'">Tie</option>
                             </select>
                         </div>
                     </div>
@@ -32,7 +32,7 @@
                     <div class="control">
                         <label for="shotsAgainst" class="label">Shots Against</label>
                         <input id="shotsAgainst" name="shotsAgainst" class="input"
-                               type="number" placeholder="0"/>
+                               type="number" v-model="shotsAgainst"/>
                     </div>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                     <div class="control">
                         <label for="saves" class="label">Saves</label>
                         <input id="saves" name="saves" class="input" type="number"
-                               placeholder="0"/>
+                               v-model="saves"/>
                     </div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     <div class="control">
                         <label for="goalsAgainst" class="label">Goals Against</label>
                         <input id="goalsAgainst" name="goalsAgainst" class="input"
-                               type="number" placeholder="0"/>
+                               type="number" v-model="goalsAgainst"/>
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <div class="control">
                         <br/>
                         <label class="checkbox">
-                            <input type="checkbox">
+                            <input type="checkbox" v-model="starter">
                             Starter?
                         </label>
                     </div>
@@ -78,6 +78,16 @@
             count: Number,
             gameTime: String,
             team: Number
+        },
+        data: function () {
+            return {
+                goalie: 0,
+                result: '',
+                starter: false,
+                shotsAgainst: 0,
+                saves: 0,
+                goalsAgainst: 0
+            }
         }
     }
 </script>

@@ -16,93 +16,6 @@
         <div class="container">
             <hr class="hr"/>
 
-            <h2 class="subtitle">TODO</h2>
-            <h3>Red = Not yet started</h3>
-            <h3>Yellow = UI complete, data is not ready for axios post</h3>
-            <h3>Green = Good to go to back end</h3>
-            <br />
-            <div class="tile is-ancestor">
-                <div class="tile is-parent">
-                    <article class="tile is-child notification is-warning">
-                        <div class="content">
-                            <p class="title">Game Details</p>
-                            <p class="subtitle">gameTime | LocalDateTime</p>
-                            <p class="subtitle">homeTeamScore | Integer</p>
-                            <p class="subtitle">awayTeamScore | Integer</p>
-                            <p class="subtitle">skaterGameDetails | Set&#60;SkaterGameDetails&#62;</p>
-                            <p class="subtitle">goalieGameDetails | Set&#60;GoalieGameDetails&#62;</p>
-                            <p class="subtitle">teamGameDetails | Set&#60;TeamGameDetails&#62;</p>
-                            <p class="subtitle">scoringPlays | Set&#60;ScoringPlays&#62;</p>
-                        </div>
-                    </article>
-                </div>
-                <div class="tile is-vertical is-7">
-                    <div class="tile">
-                        <div class="tile is-parent is-vertical">
-                            <article class="tile is-child notification is-warning">
-                                <p class="title">SkaterGameDetails</p>
-                                <p class="subtitle">gameTime | LocalDateTime</p>
-                                <p class="subtitle">participant | Skater</p>
-                                <p class="subtitle">team | Team</p>
-                                <p class="subtitle">goals | Integer</p>
-                                <p class="subtitle">assists | Integer</p>
-                                <p class="subtitle">shots | Integer</p>
-                                <p class="subtitle">blockedShots | Integer</p>
-                            </article>
-                            <article class="tile is-child notification is-success">
-                                <p class="title">TeamGameDetails</p>
-                                <p class="subtitle">gameTime | LocalDateTime</p>
-                                <p class="subtitle">participant | Team</p>
-                                <p class="subtitle">gameResult | String</p>
-                                <p class="subtitle">goalsFor | Integer</p>
-                                <p class="subtitle">goalsAgainst | Integer</p>
-                            </article>
-                        </div>
-                        <div class="tile is-parent is-vertical">
-                            <article class="tile is-child notification is-warning">
-                                <p class="title">GoalieGameDetails</p>
-                                <p class="subtitle">gameTime | LocalDateTime</p>
-                                <p class="subtitle">participant | Goalie</p>
-                                <p class="subtitle">team | Team</p>
-                                <p class="subtitle">isStarter | Boolean</p>
-                                <p class="subtitle">gameResult | String</p>
-                                <p class="subtitle">shotsAgainst | Integer</p>
-                                <p class="subtitle">saves | Integer</p>
-                                <p class="subtitle">goalsAgainst | Integer</p>
-                            </article>
-                            <article class="tile is-child notification is-warning">
-                                <p class="title">ScoringPlays</p>
-                                <p class="subtitle">team | Team</p>
-                                <p class="subtitle">scoringSkater | Skater</p>
-                                <p class="subtitle">primaryAssistingSkater | Skater</p>
-                                <p class="subtitle">secondaryAssistingSkater | Skater</p>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="columns is-multiline">
-                <div class="column is-12">
-                    <div class="tile is-ancestor">
-                        <div class="tile is-parent">
-                            <article class="tile is-child notification is-success">
-                                <div class="content">
-                                    <p class="title">Game</p>
-                                    <p class="subtitle">gameTime | LocalDateTime</p>
-                                    <p class="subtitle">seasonString | String</p>
-                                    <p class="subtitle">gameStatus | String</p>
-                                    <p class="subtitle">homeTeam | Team</p>
-                                    <p class="subtitle">awayTeam | Team</p>
-                                    <p class="subtitle">gameDetails | GameDetails</p>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="hr"/>
-
             <div class="columns is-multiline">
                 <div class="column is-12">
                     <div class="card">
@@ -136,7 +49,9 @@
                                         </nav>
                                         <hr class="hr"/>
                                         <div v-for="(gGD, index) in homeGoalieGameDetails">
-                                            <GoalieGameDetailsComponent :goalies="goalies" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.homeTeam.code"/>
+                                            <GoalieGameDetailsComponent :goalies="goalies" :count="index + 1"
+                                                                        :game-time="game.gameTime.toString()"
+                                                                        :team="game.homeTeam.code"/>
                                         </div>
                                     </div>
                                     <div class="column is-4-desktop is-12-tablet is-12-mobile">
@@ -161,7 +76,9 @@
                                         </nav>
                                         <hr class="hr"/>
                                         <div v-for="(sGD, index) in homeSkaterGameDetails">
-                                            <SkaterGameDetailsComponent :skaters="skaters" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.homeTeam.code"/>
+                                            <SkaterGameDetailsComponent :skaters="skaters" :count="index + 1"
+                                                                        :game-time="game.gameTime.toString()"
+                                                                        :team="game.homeTeam.code"/>
                                         </div>
                                     </div>
                                     <div class="column is-4-desktop is-12-tablet is-12-mobile">
@@ -175,10 +92,11 @@
                                                     <label for="homeGameResult" class="label">Result</label>
                                                     <div class="control">
                                                         <div class="select is-fullwidth">
-                                                            <select id="homeGameResult" name="homeGameResult" v-model="homeGameResult">
-                                                                <option>Win</option>
-                                                                <option>Loss</option>
-                                                                <option>Tie</option>
+                                                            <select id="homeGameResult" name="homeGameResult"
+                                                                    v-model="homeGameResult">
+                                                                <option :value="'win'">Win</option>
+                                                                <option :value="'loss'">Loss</option>
+                                                                <option :value="'tie'">Tie</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -196,9 +114,12 @@
                                             <div class="column is-4">
                                                 <div class="field">
                                                     <div class="control">
-                                                        <label for="homeGoalsAgainst" class="label">Goals Against</label>
-                                                        <input id="homeGoalsAgainst" name="homeGoalsAgainst" class="input"
-                                                               type="number" placeholder="0" v-model="homeGoalsAgainst"/>
+                                                        <label for="homeGoalsAgainst" class="label">Goals
+                                                            Against</label>
+                                                        <input id="homeGoalsAgainst" name="homeGoalsAgainst"
+                                                               class="input"
+                                                               type="number" placeholder="0"
+                                                               v-model="homeGoalsAgainst"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -229,7 +150,8 @@
                                         </nav>
                                         <hr class="hr"/>
                                         <div v-if="homeScoringPlays.length > 0" v-for="(sp, index) in homeScoringPlays">
-                                            <ScoringPlayComponent :index="index" :skaters="skaters" :team="game.homeTeam.code"/>
+                                            <ScoringPlayComponent :index="index" :skaters="skaters"
+                                                                  :team="game.homeTeam.code"/>
                                         </div>
                                         <div v-if="homeScoringPlays.length === 0" class="has-text-centered">
                                             <p class="subtitle">
@@ -274,7 +196,9 @@
                                         </nav>
                                         <hr class="hr"/>
                                         <div v-for="(gGD, index) in awayGoalieGameDetails">
-                                            <GoalieGameDetailsComponent :goalies="goalies" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.awayTeam.code"/>
+                                            <GoalieGameDetailsComponent :goalies="goalies" :count="index + 1"
+                                                                        :game-time="game.gameTime.toString()"
+                                                                        :team="game.awayTeam.code"/>
                                         </div>
                                     </div>
                                     <div class="column is-4-desktop is-12-tablet is-12-mobile">
@@ -299,7 +223,9 @@
                                         </nav>
                                         <hr class="hr"/>
                                         <div v-for="(sGD, index) in awaySkaterGameDetails">
-                                            <SkaterGameDetailsComponent :skaters="skaters" :count="index + 1" :game-time="game.gameTime.toString()" :team="game.awayTeam.code"/>
+                                            <SkaterGameDetailsComponent :skaters="skaters" :count="index + 1"
+                                                                        :game-time="game.gameTime.toString()"
+                                                                        :team="game.awayTeam.code"/>
                                         </div>
                                     </div>
                                     <div class="column is-4-desktop is-12-tablet is-12-mobile">
@@ -313,10 +239,11 @@
                                                     <label for="awayGameResult" class="label">Result</label>
                                                     <div class="control">
                                                         <div class="select is-fullwidth">
-                                                            <select id="awayGameResult" name="awayGameResult" v-model="awayGameResult">
-                                                                <option>Win</option>
-                                                                <option>Loss</option>
-                                                                <option>Tie</option>
+                                                            <select id="awayGameResult" name="awayGameResult"
+                                                                    v-model="awayGameResult">
+                                                                <option :value="'win'">Win</option>
+                                                                <option :value="'loss'">Loss</option>
+                                                                <option :value="'tie'">Tie</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -334,9 +261,12 @@
                                             <div class="column is-4">
                                                 <div class="field">
                                                     <div class="control">
-                                                        <label for="awayGoalsAgainst" class="label">Goals Against</label>
-                                                        <input id="awayGoalsAgainst" name="awayGoalsAgainst" class="input"
-                                                               type="number" placeholder="0" v-model="awayGoalsAgainst"/>
+                                                        <label for="awayGoalsAgainst" class="label">Goals
+                                                            Against</label>
+                                                        <input id="awayGoalsAgainst" name="awayGoalsAgainst"
+                                                               class="input"
+                                                               type="number" placeholder="0"
+                                                               v-model="awayGoalsAgainst"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -367,7 +297,8 @@
                                         </nav>
                                         <hr class="hr"/>
                                         <div v-if="awayScoringPlays.length > 0" v-for="(sp, index) in awayScoringPlays">
-                                            <ScoringPlayComponent :index="index" :skaters="skaters" :team="game.awayTeam.code"/>
+                                            <ScoringPlayComponent :index="index" :skaters="skaters"
+                                                                  :team="game.awayTeam.code"/>
                                         </div>
                                         <div v-if="awayScoringPlays.length === 0" class="has-text-centered">
                                             <p class="subtitle">
@@ -413,7 +344,10 @@
                 homeGoalsAgainst: 0,
                 awayGameResult: '',
                 awayGoalsFor: 0,
-                awayGoalsAgainst: 0
+                awayGoalsAgainst: 0,
+                sGD: [],
+                gGD: [],
+                sP: []
             }
         },
         created() {
@@ -489,36 +423,69 @@
                     this.awayScoringPlays.pop();
                 }
             },
+            generateSkaterGameDetails() {
+                this.$children
+                    .filter(component => component.constructor.options.name === 'SkaterGameDetailsComponent')
+                    .forEach(
+                        detailsComponent =>
+                            this.sGD.push(
+                                {
+                                    gameTime: this.game.gameTime.toString().replace('T', ' '),
+                                    participant: detailsComponent.skater,
+                                    team: detailsComponent.team,
+                                    goals: detailsComponent.goals,
+                                    assists: detailsComponent.assists,
+                                    shots: detailsComponent.shots,
+                                    blockedShots: detailsComponent.blockedShots
+                                }
+                            )
+                    )
+            },
+            generateGoalieGameDetails() {
+                this.$children
+                    .filter(component => component.constructor.options.name === 'GoalieGameDetailsComponent')
+                    .forEach(
+                        detailsComponent =>
+                            this.gGD.push(
+                                {
+                                    gameTime: this.game.gameTime.toString().replace('T', ' '),
+                                    participant: detailsComponent.goalie,
+                                    team: detailsComponent.team,
+                                    isStarter: detailsComponent.starter,
+                                    gameResult: detailsComponent.result,
+                                    shotsAgainst: detailsComponent.shotsAgainst,
+                                    saves: detailsComponent.saves,
+                                    goalsAgainst: detailsComponent.goalsAgainst
+                                }
+                            )
+                    )
+            },
+            generateScoringPlays() {
+                this.$children
+                    .filter(component => component.constructor.options.name === 'ScoringPlayComponent')
+                    .forEach(
+                        scoringPlayComponent =>
+                            this.sP.push(
+                                {
+                                    team: scoringPlayComponent.team,
+                                    scoringSkater: scoringPlayComponent.scoring,
+                                    primaryAssistingSkater: scoringPlayComponent.primary,
+                                    secondaryAssistingSkater: scoringPlayComponent.secondary
+                                }
+                            )
+                    )
+            },
             submitForm() {
+                this.generateGoalieGameDetails();
+                this.generateSkaterGameDetails();
+                this.generateScoringPlays();
+
                 axios.post(this.domain + '/api/game/' + this.$route.params.id + '/complete', {
                     gameTime: this.game.gameTime.toString().replace('T', ' '),
                     homeTeamScore: this.homeGoalsFor,
                     awayTeamScore: this.awayGoalsFor,
-                    skaterGameDetails: [
-                        {
-                            gameTime: this.game.gameTime.toString().replace('T', ' '),
-                            participant: 0,
-                            team: 0,
-                            goals: 0,
-                            assists: 0,
-                            shots: 0,
-                            blockedShots: 0
-                        },
-                        {}
-                    ],
-                    goalieGameDetails:[
-                        {
-                            gameTime: this.game.gameTime.toString().replace('T', ' '),
-                            participant: 0,
-                            team: 0,
-                            isStarter: false,
-                            gameResult: '',
-                            shotsAgainst: 0,
-                            saves: 0,
-                            goalsAgainst: 0
-                        },
-                        {}
-                    ],
+                    skaterGameDetails: this.sGD,
+                    goalieGameDetails: this.gGD,
                     teamGameDetails: [
                         {
                             gameTime: this.game.gameTime.toString().replace('T', ' '),
@@ -535,15 +502,7 @@
                             goalsAgainst: this.awayGoalsAgainst
                         }
                     ],
-                    scoringPlays: [
-                        {
-                            team: 0,
-                            scoringSkater: 0,
-                            primaryAssistingSkater: 0,
-                            secondaryAssistingSkater: 0
-                        },
-                        {}
-                    ]
+                    scoringPlays: this.sP
                 })
                     .then(response => {
                         if (response.data.response === 'SUCCESS') {

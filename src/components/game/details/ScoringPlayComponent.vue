@@ -11,8 +11,8 @@
                     <label for="scoringSkater" class="label">Goal Scorer</label>
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="scoringSkater" name="scoringSkater">
-                                <option v-for="skater in skaters">{{ skater.name }}</option>
+                            <select id="scoringSkater" name="scoringSkater" v-model="scoring">
+                                <option v-for="skater in skaters" :value="skater.code">{{ skater.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -23,8 +23,8 @@
                     <label for="primaryAssistingSkater" class="label">Primary Assisting Skater</label>
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="primaryAssistingSkater" name="primaryAssistingSkater">
-                                <option v-for="skater in skaters">{{ skater.name }}</option>
+                            <select id="primaryAssistingSkater" name="primaryAssistingSkater" v-model="primary">
+                                <option v-for="skater in skaters" :value="skater.code">{{ skater.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -35,8 +35,8 @@
                     <label for="secondaryAssistingSkater" class="label">Secondary Assisting Skater</label>
                     <div class="control">
                         <div class="select is-fullwidth">
-                            <select id="secondaryAssistingSkater" name="secondaryAssistingSkater">
-                                <option v-for="skater in skaters">{{ skater.name }}</option>
+                            <select id="secondaryAssistingSkater" name="secondaryAssistingSkater" v-model="secondary">
+                                <option v-for="skater in skaters" :value="skater.code">{{ skater.name }}</option>
                             </select>
                         </div>
                     </div>
@@ -54,6 +54,13 @@
             index: Number,
             skaters: Array,
             team: Number
+        },
+        data: function () {
+            return {
+                scoring: 0,
+                primary: 0,
+                secondary: 0
+            }
         }
     }
 </script>
