@@ -17,13 +17,13 @@
             <hr class="hr"/>
 
             <h2 class="subtitle">TODO</h2>
-            <h3>Red = No yet started</h3>
+            <h3>Red = Not yet started</h3>
             <h3>Yellow = UI complete, data is not ready for axios post</h3>
             <h3>Green = Good to go to back end</h3>
             <br />
             <div class="tile is-ancestor">
                 <div class="tile is-parent">
-                    <article class="tile is-child notification is-danger">
+                    <article class="tile is-child notification is-warning">
                         <div class="content">
                             <p class="title">Game Details</p>
                             <p class="subtitle">gameTime | LocalDateTime</p>
@@ -49,7 +49,7 @@
                                 <p class="subtitle">shots | Integer</p>
                                 <p class="subtitle">blockedShots | Integer</p>
                             </article>
-                            <article class="tile is-child notification is-warning">
+                            <article class="tile is-child notification is-success">
                                 <p class="title">TeamGameDetails</p>
                                 <p class="subtitle">gameTime | LocalDateTime</p>
                                 <p class="subtitle">participant | Team</p>
@@ -175,7 +175,7 @@
                                                     <label for="homeGameResult" class="label">Result</label>
                                                     <div class="control">
                                                         <div class="select is-fullwidth">
-                                                            <select id="homeGameResult" name="homeGameResult">
+                                                            <select id="homeGameResult" name="homeGameResult" v-model="homeGameResult">
                                                                 <option>Win</option>
                                                                 <option>Loss</option>
                                                                 <option>Tie</option>
@@ -189,7 +189,7 @@
                                                     <div class="control">
                                                         <label for="homeGoalsFor" class="label">Goals For</label>
                                                         <input id="homeGoalsFor" name="homeGoalsFor" class="input"
-                                                               type="number" placeholder="0"/>
+                                                               type="number" placeholder="0" v-model="homeGoalsFor"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -198,7 +198,7 @@
                                                     <div class="control">
                                                         <label for="homeGoalsAgainst" class="label">Goals Against</label>
                                                         <input id="homeGoalsAgainst" name="homeGoalsAgainst" class="input"
-                                                               type="number" placeholder="0"/>
+                                                               type="number" placeholder="0" v-model="homeGoalsAgainst"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -228,8 +228,8 @@
                                             </div>
                                         </nav>
                                         <hr class="hr"/>
-                                        <div v-if="homeScoringPlays.length > 0" v-for="sp in homeScoringPlays">
-                                            <ScoringPlayComponent :skaters="skaters" :team="game.homeTeam.code"/>
+                                        <div v-if="homeScoringPlays.length > 0" v-for="(sp, index) in homeScoringPlays">
+                                            <ScoringPlayComponent :index="index" :skaters="skaters" :team="game.homeTeam.code"/>
                                         </div>
                                         <div v-if="homeScoringPlays.length === 0" class="has-text-centered">
                                             <p class="subtitle">
@@ -313,7 +313,7 @@
                                                     <label for="awayGameResult" class="label">Result</label>
                                                     <div class="control">
                                                         <div class="select is-fullwidth">
-                                                            <select id="awayGameResult" name="awayGameResult">
+                                                            <select id="awayGameResult" name="awayGameResult" v-model="awayGameResult">
                                                                 <option>Win</option>
                                                                 <option>Loss</option>
                                                                 <option>Tie</option>
@@ -327,7 +327,7 @@
                                                     <div class="control">
                                                         <label for="awayGoalsFor" class="label">Goals For</label>
                                                         <input id="awayGoalsFor" name="awayGoalsFor" class="input"
-                                                               type="number" placeholder="0"/>
+                                                               type="number" placeholder="0" v-model="awayGoalsFor"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -336,7 +336,7 @@
                                                     <div class="control">
                                                         <label for="awayGoalsAgainst" class="label">Goals Against</label>
                                                         <input id="awayGoalsAgainst" name="awayGoalsAgainst" class="input"
-                                                               type="number" placeholder="0"/>
+                                                               type="number" placeholder="0" v-model="awayGoalsAgainst"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -366,8 +366,8 @@
                                             </div>
                                         </nav>
                                         <hr class="hr"/>
-                                        <div v-if="awayScoringPlays.length > 0" v-for="sp in awayScoringPlays">
-                                            <ScoringPlayComponent :skaters="skaters" :team="game.awayTeam.code"/>
+                                        <div v-if="awayScoringPlays.length > 0" v-for="(sp, index) in awayScoringPlays">
+                                            <ScoringPlayComponent :index="index" :skaters="skaters" :team="game.awayTeam.code"/>
                                         </div>
                                         <div v-if="awayScoringPlays.length === 0" class="has-text-centered">
                                             <p class="subtitle">
@@ -378,6 +378,9 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="submit-button" v-on:click="submitForm()">
+                        Submit
                     </div>
                 </div>
             </div>
@@ -405,6 +408,12 @@
                 awayScoringPlays: [],
                 goalies: [],
                 skaters: [],
+                homeGameResult: '',
+                homeGoalsFor: 0,
+                homeGoalsAgainst: 0,
+                awayGameResult: '',
+                awayGoalsFor: 0,
+                awayGoalsAgainst: 0
             }
         },
         created() {
@@ -417,10 +426,14 @@
         methods: {
             getGame: function () {
                 axios.all([
-                    axios.get(this.domain + '/api/game/' + this.$route.params.id)
+                    axios.get(this.domain + '/api/game/' + this.$route.params.id),
+                    axios.get(this.domain + '/api/skater/all-active?seasonString=' + this.cs + '&field=points&order=asc'),
+                    axios.get(this.domain + '/api/goalie/all-active?seasonString=' + this.cs + '&field=wins&order=asc')
                 ])
-                    .then(axios.spread((gRes) => {
+                    .then(axios.spread((gRes, sRes, goRes) => {
                         this.game = gRes.data.data;
+                        this.skaters = sRes.data.data;
+                        this.goalies = goRes.data.data;
                     }))
                     .catch(error => {
                         console.log(error)
@@ -475,6 +488,73 @@
                 } else {
                     this.awayScoringPlays.pop();
                 }
+            },
+            submitForm() {
+                axios.post(this.domain + '/api/game/' + this.$route.params.id + '/complete', {
+                    gameTime: this.game.gameTime.toString().replace('T', ' '),
+                    homeTeamScore: this.homeGoalsFor,
+                    awayTeamScore: this.awayGoalsFor,
+                    skaterGameDetails: [
+                        {
+                            gameTime: this.game.gameTime.toString().replace('T', ' '),
+                            participant: 0,
+                            team: 0,
+                            goals: 0,
+                            assists: 0,
+                            shots: 0,
+                            blockedShots: 0
+                        },
+                        {}
+                    ],
+                    goalieGameDetails:[
+                        {
+                            gameTime: this.game.gameTime.toString().replace('T', ' '),
+                            participant: 0,
+                            team: 0,
+                            isStarter: false,
+                            gameResult: '',
+                            shotsAgainst: 0,
+                            saves: 0,
+                            goalsAgainst: 0
+                        },
+                        {}
+                    ],
+                    teamGameDetails: [
+                        {
+                            gameTime: this.game.gameTime.toString().replace('T', ' '),
+                            participant: this.game.homeTeam.code,
+                            gameResult: this.homeGameResult,
+                            goalsFor: this.homeGoalsFor,
+                            goalsAgainst: this.homeGoalsAgainst
+                        },
+                        {
+                            gameTime: this.game.gameTime.toString().replace('T', ' '),
+                            participant: this.game.awayTeam.code,
+                            gameResult: this.awayGameResult,
+                            goalsFor: this.awayGoalsFor,
+                            goalsAgainst: this.awayGoalsAgainst
+                        }
+                    ],
+                    scoringPlays: [
+                        {
+                            team: 0,
+                            scoringSkater: 0,
+                            primaryAssistingSkater: 0,
+                            secondaryAssistingSkater: 0
+                        },
+                        {}
+                    ]
+                })
+                    .then(response => {
+                        if (response.data.response === 'SUCCESS') {
+                            this.$router.push('scores')
+                        } else {
+                            console.log(response)
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    });
             }
         }
     }
@@ -485,6 +565,19 @@
     .bordered {
         border: 2px solid rgba(155, 155, 255, 0.25);
         border-radius: 25px;
+    }
+
+    .submit-button {
+        padding: 10px 0 10px 0;
+        text-align: center;
+        background-color: dodgerblue;
+        color: white;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
 </style>

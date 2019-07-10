@@ -7,8 +7,7 @@
                     <div class="control">
                         <div class="select is-fullwidth">
                             <select id="goalieName" name="goalieName">
-                                <option>Select dropdown</option>
-                                <option>With options</option>
+                                <option v-for="goalie in goalies">{{ goalie.name }}</option>
                             </select>
                         </div>
                     </div>
