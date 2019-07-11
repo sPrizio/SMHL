@@ -151,7 +151,7 @@
                                 <table class="table is-fullwidth">
                                     <thead>
                                     <tr>
-                                        <th>Opponent</th>
+                                        <th>Team</th>
                                         <th>Date</th>
                                         <th class="smhl-stat-table-centering">G</th>
                                         <th class="smhl-stat-table-centering">A</th>

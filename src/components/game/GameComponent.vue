@@ -43,7 +43,8 @@
                     <div class="card">
                         <div class="card-content">
                             <div class="content">
-                                Game Details
+                                <p class="subtitle" v-if="activeTab === 'home'">{{ game.homeTeam.name }}</p>
+                                <p class="subtitle" v-if="activeTab === 'away'">{{ game.awayTeam.name }}</p>
                             </div>
                         </div>
                     </div>

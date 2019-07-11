@@ -12,6 +12,7 @@
                     <div class="control">
                         <div class="select is-fullwidth">
                             <select id="scoringSkater" name="scoringSkater" v-model="scoring">
+                                <option :value="-1">None</option>
                                 <option v-for="skater in skaters" :value="skater.code">{{ skater.name }}</option>
                             </select>
                         </div>
@@ -24,6 +25,7 @@
                     <div class="control">
                         <div class="select is-fullwidth">
                             <select id="primaryAssistingSkater" name="primaryAssistingSkater" v-model="primary">
+                                <option :value="-1">None</option>
                                 <option v-for="skater in skaters" :value="skater.code">{{ skater.name }}</option>
                             </select>
                         </div>
@@ -36,6 +38,7 @@
                     <div class="control">
                         <div class="select is-fullwidth">
                             <select id="secondaryAssistingSkater" name="secondaryAssistingSkater" v-model="secondary">
+                                <option :value="-1">None</option>
                                 <option v-for="skater in skaters" :value="skater.code">{{ skater.name }}</option>
                             </select>
                         </div>

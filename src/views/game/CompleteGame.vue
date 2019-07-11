@@ -94,9 +94,9 @@
                                                         <div class="select is-fullwidth">
                                                             <select id="homeGameResult" name="homeGameResult"
                                                                     v-model="homeGameResult">
-                                                                <option :value="'win'">Win</option>
-                                                                <option :value="'loss'">Loss</option>
-                                                                <option :value="'tie'">Tie</option>
+                                                                <option :value="'WIN'">Win</option>
+                                                                <option :value="'LOSS'">Loss</option>
+                                                                <option :value="'TIE'">Tie</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -241,9 +241,9 @@
                                                         <div class="select is-fullwidth">
                                                             <select id="awayGameResult" name="awayGameResult"
                                                                     v-model="awayGameResult">
-                                                                <option :value="'win'">Win</option>
-                                                                <option :value="'loss'">Loss</option>
-                                                                <option :value="'tie'">Tie</option>
+                                                                <option :value="'WIN'">Win</option>
+                                                                <option :value="'LOSS'">Loss</option>
+                                                                <option :value="'TIE'">Tie</option>
                                                             </select>
                                                         </div>
                                                     </div>

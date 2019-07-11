@@ -19,9 +19,9 @@
                     <div class="control">
                         <div class="select is-fullwidth">
                             <select id="gameResult" name="gameResult" v-model="result">
-                                <option :value="'win'">Win</option>
-                                <option :value="'loss'">Loss</option>
-                                <option :value="'tie'">Tie</option>
+                                <option :value="'WIN'">Win</option>
+                                <option :value="'LOSS'">Loss</option>
+                                <option :value="'TIE'">Tie</option>
                             </select>
                         </div>
                     </div>
