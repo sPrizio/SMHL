@@ -3,7 +3,7 @@
         <nav class="navbar is-light" role="navigation" aria-label="main navigation">
             <div class="container">
                 <div class="navbar-brand">
-                    <router-link class="navbar-item" to="home">
+                    <router-link class="navbar-item" to="/home">
                         <img src="https://bulma.io/images/bulma-logo.png" alt="SMHL Website Brand" width="112" height="28" />
                     </router-link>
 
