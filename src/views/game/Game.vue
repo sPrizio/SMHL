@@ -1,6 +1,6 @@
 <template>
     <div id="games">
-        <GameComponent :game="game"/>
+        <GameComponent :game="game" :stars="stars"/>
     </div>
 </template>
 
@@ -15,7 +15,8 @@
         },
         data: function () {
             return {
-                game: ''
+                game: '',
+                stars: []
             }
         },
         created() {
@@ -24,10 +25,12 @@
         methods: {
             getGame: function () {
                 axios.all([
-                    axios.get(this.domain + '/api/game/' + this.$route.params.id)
+                    axios.get(this.domain + '/api/game/' + this.$route.params.id),
+                    axios.get(this.domain + '/api/game/' + this.$route.params.id + '/three-stars')
                 ])
-                    .then(axios.spread((gRes) => {
+                    .then(axios.spread((gRes, sRes) => {
                         this.game = gRes.data.data;
+                        this.stars = sRes.data.data;
                     }))
                     .catch(error => {
                         console.log(error)
