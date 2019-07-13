@@ -361,8 +361,8 @@
             getGame: function () {
                 axios.all([
                     axios.get(this.domain + '/api/game/' + this.$route.params.id),
-                    axios.get(this.domain + '/api/skater/all-active?seasonString=' + this.cs + '&field=points&order=asc'),
-                    axios.get(this.domain + '/api/goalie/all-active?seasonString=' + this.cs + '&field=wins&order=asc')
+                    axios.get(this.domain + '/api/skater/all'),
+                    axios.get(this.domain + '/api/goalie/all')
                 ])
                     .then(axios.spread((gRes, sRes, goRes) => {
                         this.game = gRes.data.data;
