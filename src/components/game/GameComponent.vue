@@ -28,6 +28,42 @@
         <div class="container">
             <div class="columns is-multiline">
                 <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop">
+                    <h2 class="subtitle">
+                        3 Stars
+                    </h2>
+                    <hr class="hr"/>
+                    <div class="columns is-multiline">
+                        <div class="column is-4" v-for="(star, index) in stars">
+                            <div class="card">
+                                <header class="card-header">
+                                    <p class="card-header-title">
+                                        <span v-if="index === 0">
+                                            <font-awesome-icon icon="star" />
+                                        </span>
+                                        <span v-if="index === 1">
+                                            <font-awesome-icon icon="star" />
+                                            <font-awesome-icon icon="star" />
+                                        </span>
+                                        <span v-if="index === 2">
+                                            <font-awesome-icon icon="star" />
+                                            <font-awesome-icon icon="star" />
+                                            <font-awesome-icon icon="star" />
+                                        </span>
+                                    </p>
+                                </header>
+                                <div class="card-content">
+                                    <div class="content">
+                                        <p>{{ star.details.participant.name }}</p>
+                                        <p>Goals: {{ star.details.goals }}</p>
+                                        <p>Assists: {{ star.details.assists }}</p>
+                                        <p>Points: {{ star.details.goals + star.details.assists }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop">
                     <div class="tabs is-centered is-medium">
                         <ul>
                             <li v-bind:class="activeHome" v-on:click="toggleTab">
@@ -40,14 +76,8 @@
                     </div>
                 </div>
                 <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop">
-                    <div class="card">
-                        <div class="card-content">
-                            <div class="content">
-                                <p class="subtitle" v-if="activeTab === 'home'">{{ game.homeTeam.name }}</p>
-                                <p class="subtitle" v-if="activeTab === 'away'">{{ game.awayTeam.name }}</p>
-                            </div>
-                        </div>
-                    </div>
+                    <h2 class="subtitle" v-if="activeTab === 'home'">{{ game.homeTeam.name }}</h2>
+                    <h2 class="subtitle" v-if="activeTab === 'away'">{{ game.awayTeam.name }}</h2>
                 </div>
                 <div class="column is-10-desktop is-12-tablet is-12-mobile is-offset-1-desktop"
                      v-if="this.activeTab === 'home'">
@@ -68,12 +98,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="details in game.gameDetails.goalieGameDetails" v-if="details.team.code === game.homeTeam.code">
+                                            <tr v-for="details in game.gameDetails.goalieGameDetails"
+                                                v-if="details.team.code === game.homeTeam.code">
                                                 <td>{{ details.goalie.name }}</td>
-                                                <td class="smhl-stat-table-centering">{{ details.gameResult.toString().substring(0, 1) }}</td>
+                                                <td class="smhl-stat-table-centering">{{
+                                                    details.gameResult.toString().substring(0, 1) }}
+                                                </td>
                                                 <td class="smhl-stat-table-centering">{{ details.shotsAgainst }}</td>
                                                 <td class="smhl-stat-table-centering">{{ details.saves }}</td>
-                                                <td class="smhl-stat-table-centering">{{ (details.saves / details.shotsAgainst).toFixed(3) }}</td>
+                                                <td class="smhl-stat-table-centering">{{ (details.saves /
+                                                    details.shotsAgainst).toFixed(3) }}
+                                                </td>
                                                 <td class="smhl-stat-table-centering">{{ details.goalsAgainst }}</td>
                                             </tr>
                                             </tbody>
@@ -98,7 +133,8 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="details in game.gameDetails.skaterGameDetails" v-if="details.team.code === game.homeTeam.code">
+                                            <tr v-for="details in game.gameDetails.skaterGameDetails"
+                                                v-if="details.team.code === game.homeTeam.code">
                                                 <td>{{ details.skater.name }}</td>
                                                 <td class="smhl-stat-table-centering">{{ details.goals }}</td>
                                                 <td class="smhl-stat-table-centering">{{ details.assists }}</td>
@@ -133,12 +169,17 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="details in game.gameDetails.goalieGameDetails" v-if="details.team.code === game.awayTeam.code">
+                                            <tr v-for="details in game.gameDetails.goalieGameDetails"
+                                                v-if="details.team.code === game.awayTeam.code">
                                                 <td>{{ details.goalie.name }}</td>
-                                                <td class="smhl-stat-table-centering">{{ details.gameResult.toString().substring(0, 1) }}</td>
+                                                <td class="smhl-stat-table-centering">{{
+                                                    details.gameResult.toString().substring(0, 1) }}
+                                                </td>
                                                 <td class="smhl-stat-table-centering">{{ details.shotsAgainst }}</td>
                                                 <td class="smhl-stat-table-centering">{{ details.saves }}</td>
-                                                <td class="smhl-stat-table-centering">{{ (details.saves / details.shotsAgainst).toFixed(3) }}</td>
+                                                <td class="smhl-stat-table-centering">{{ (details.saves /
+                                                    details.shotsAgainst).toFixed(3) }}
+                                                </td>
                                                 <td class="smhl-stat-table-centering">{{ details.goalsAgainst }}</td>
                                             </tr>
                                             </tbody>
@@ -163,7 +204,8 @@
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr v-for="details in game.gameDetails.skaterGameDetails" v-if="details.team.code === game.awayTeam.code">
+                                            <tr v-for="details in game.gameDetails.skaterGameDetails"
+                                                v-if="details.team.code === game.awayTeam.code">
                                                 <td>{{ details.skater.name }}</td>
                                                 <td class="smhl-stat-table-centering">{{ details.goals }}</td>
                                                 <td class="smhl-stat-table-centering">{{ details.assists }}</td>
@@ -188,7 +230,8 @@
     export default {
         name: "GameComponent",
         props: {
-            game: Object
+            game: Object,
+            stars: Array
         },
         data: function () {
             return {
