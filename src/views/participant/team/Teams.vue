@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import TeamTable from "../../components/tables/TeamTable";
+    import TeamTable from "../../../components/tables/TeamTable";
     import axios from 'axios';
 
     export default {
